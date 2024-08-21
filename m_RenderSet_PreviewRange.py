@@ -1,3 +1,11 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Set frame range to "Preview Range".
+"""
+
+
 import c4d
 
 

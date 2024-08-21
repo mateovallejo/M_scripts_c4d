@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 0.1.0
+Description-US:Reset selected objects visibility.
+"""
+
 import c4d
 from c4d import gui
 #Welcome to the world of Python

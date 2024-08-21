@@ -1,4 +1,12 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 0.1.0
+Description-US:Set resolution to 1920 x 1920.
+"""
+
 import c4d
+
 
 def main():
     # Obtén el documento actual
@@ -10,6 +18,7 @@ def main():
     # Establece la resolución de salida
     render_data[c4d.RDATA_XRES] = 1920  # Ancho
     render_data[c4d.RDATA_YRES] = 1920  # Alto
+    render_data[c4d.RDATA_FILMASPECT] = 1920.0 / 1920.0
 
     # Actualiza el documento
     c4d.EventAdd()

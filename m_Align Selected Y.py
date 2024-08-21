@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Align selected vertices on Y.
+"""
+
 import c4d
 
 def get_selected_points_from_selection(obj):

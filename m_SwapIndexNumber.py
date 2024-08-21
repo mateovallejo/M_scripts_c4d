@@ -1,3 +1,12 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 0.1.0
+Description-US:Swap index number.
+"""
+
+#arreglar metodo de seleccion o de utilizacion
+
 import c4d
 
 def main():

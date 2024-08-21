@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Align selected vertices on origin Z.
+"""
+
 import c4d
 from c4d import utils
 

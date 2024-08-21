@@ -2,7 +2,7 @@
 Author: Mateo Vallejo
 Website:
 Version: 1.0.0
-Name-US:m_CameraFilter Toogle
+Name-US:m_CameraFilter Toggle
 Description-US:Align first selected object to second selected object.
 """
 

@@ -1,3 +1,11 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Paste nexto to selected object in object manager.
+"""
+
+
 import c4d
 from c4d import documents, plugins
 

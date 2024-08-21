@@ -1,3 +1,11 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Name-US:m_AlignToSelected
+Description-US:Align first selected object to second selected object.
+"""
+
 import c4d
 
 def main():

@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Toggle save output ON/OFF.
+"""
+
 import c4d
 
 def main():

@@ -1,3 +1,11 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Multiply frame resolution by 2.
+"""
+
+
 import c4d
 
 def main():

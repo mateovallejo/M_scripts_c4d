@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Add FFD object to selected objects.
+"""
+
 import c4d
 from c4d import Vector, BaseObject, utils
 

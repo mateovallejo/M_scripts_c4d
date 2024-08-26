@@ -29,6 +29,7 @@ def main():
     # Copia la propiedad de display color del primer objeto al segundo
     second_obj[c4d.ID_BASEOBJECT_USECOLOR] = first_obj[c4d.ID_BASEOBJECT_USECOLOR]
     second_obj[c4d.ID_BASEOBJECT_COLOR] = first_obj[c4d.ID_BASEOBJECT_COLOR]
+    second_obj[c4d.ID_BASELIST_ICON_COLORIZE_MODE] = 2
 
     # Registra el estado del objeto después de hacer los cambios
     doc.AddUndo(c4d.UNDOTYPE_CHANGE, second_obj)

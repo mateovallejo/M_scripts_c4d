@@ -16,8 +16,8 @@ def RandomValue():
 def main():
     doc = c4d.documents.GetActiveDocument() # Get active Cinema 4D document
     doc.StartUndo() # Start recording undos
-    
-    
+
+
     try: # Try to execute following script
         selection = doc.GetActiveObjects(1) # Get object selection
         if len(selection) == 0:
@@ -30,6 +30,7 @@ def main():
             doc.AddUndo(c4d.UNDOTYPE_CHANGE_NOCHILDREN, obj) # Record undo
             obj[c4d.ID_BASEOBJECT_USECOLOR] = 2 # Display Color = On
             obj[c4d.ID_BASEOBJECT_COLOR] = color # Apply the same random color to all objects
+            obj[c4d.ID_BASELIST_ICON_COLOR] = color # Apply the same random color to icon color
             obj[c4d.ID_BASELIST_ICON_COLORIZE_MODE] = 2
 
     except: # If something went wrong

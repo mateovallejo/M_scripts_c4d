@@ -9,9 +9,15 @@ Description-US:Set same random display color to current object selection.
 import c4d
 import random
 
-def RandomValue():
+def RandomValue(): # OLD
     r = random.random() # Random float
     return r # Return random float value
+
+
+def RandomValueC():
+    
+    return min(random.random(), .7) # Limited
+
 
 def main():
     doc = c4d.documents.GetActiveDocument() # Get active Cinema 4D document
@@ -24,7 +30,7 @@ def main():
             return # If nothing is selected, exit
 
         # Generate a single random color
-        color = c4d.Vector(RandomValue(), RandomValue(), RandomValue()) # Random color
+        color = c4d.Vector(RandomValueC(), RandomValueC(), RandomValueC()) # Random color
 
         for obj in selection: # Iterate through selected objects
             doc.AddUndo(c4d.UNDOTYPE_CHANGE_NOCHILDREN, obj) # Record undo

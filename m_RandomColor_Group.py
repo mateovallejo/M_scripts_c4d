@@ -30,6 +30,7 @@ def main():
             doc.AddUndo(c4d.UNDOTYPE_CHANGE_NOCHILDREN, obj) # Record undo
             obj[c4d.ID_BASEOBJECT_USECOLOR] = 2 # Display Color = On
             obj[c4d.ID_BASEOBJECT_COLOR] = color # Apply the same random color to all objects
+            obj[c4d.ID_MG_TRANSFORM_COLOR] = color # Apply the same random color to cloner object
             obj[c4d.ID_BASELIST_ICON_COLOR] = color # Apply the same random color to icon color
             obj[c4d.ID_BASELIST_ICON_COLORIZE_MODE] = 2
 

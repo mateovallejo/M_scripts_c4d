@@ -14,7 +14,7 @@ def main():
     # Filtra solo los objetos (excluye etiquetas, materiales, etc.)
     selected = [s for s in selection if isinstance(s, c4d.BaseObject)]
 
-    
+
     # Obtén el primer y segundo objeto seleccionado
     first_obj = selected[0]
     second_obj = selected[1]
@@ -28,6 +28,7 @@ def main():
     # Copia la propiedad de color de visualización del primer objeto al segundo
     second_obj[c4d.ID_BASEOBJECT_USECOLOR] = first_obj[c4d.ID_BASEOBJECT_USECOLOR]
     second_obj[c4d.ID_BASEOBJECT_COLOR] = first_obj[c4d.ID_BASEOBJECT_COLOR]
+    second_obj[c4d.ID_MG_TRANSFORM_COLOR] = first_obj[c4d.ID_BASEOBJECT_COLOR]
     second_obj[c4d.ID_BASELIST_ICON_COLORIZE_MODE] = 2
 
     # Termina la operación de deshacer

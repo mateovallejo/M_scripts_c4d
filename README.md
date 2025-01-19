@@ -82,331 +82,331 @@ Each script provides a specific functionality. To use a script, follow these ste
 
 ### Camera Filter.py
 
-![Camera Filter](Camera Filter.tif)
+![Camera Filter](img/Camera Filter.png)
 
 Toggles the display filter for the camera.
 
 ### Convert Hair to Spline.py
 
-![Convert Hair to Spline](Convert Hair to Spline.tif)
+![Convert Hair to Spline](img/Convert Hair to Spline.png)
 
 Converts a selected Hair object to a spline.
 
 ### copy-paste-materialTags_v002.py
 
-![copy-paste-materialTags_v002](copy-paste-materialTags_v002.tif)
+![copy-paste-materialTags_v002](img/copy-paste-materialTags_v002.png)
 
 Copies material tags from one hierarchy to another with the same objects.
 
 ### Curve_RepeatAfterBefore.py
 
-![Curve_RepeatAfterBefore](Curve_RepeatAfterBefore.tif)
+![Curve_RepeatAfterBefore](img/Curve_RepeatAfterBefore.png)
 
 Applies the "Repeat After" and "Repeat Before" options to the selected timeline.
 
 ### m_Align Selected X.py
 
-![m_Align Selected X](m_Align Selected X.tif)
+![m_Align Selected X](img/m_Align Selected X.png)
 
 Aligns selected vertices on the X axis.
 
 ### m_Align Selected Y.py
 
-![m_Align Selected Y](m_Align Selected Y.tif)
+![m_Align Selected Y](img/m_Align Selected Y.png)
 
 Aligns selected vertices on the Y axis.
 
 ### m_Align Selected Z.py
 
-![m_Align Selected Z](m_Align Selected Z.tif)
+![m_Align Selected Z](img/m_Align Selected Z.png)
 
 Aligns selected vertices on the Z axis.
 
 ### m_AlignToSelected.py
 
-![m_AlignToSelected](m_AlignToSelected.tif)
+![m_AlignToSelected](img/m_AlignToSelected.png)
 
 Aligns the first selected object to the second selected object.
 
 ### m_AlignZero Selected X.py
 
-![m_AlignZero Selected X](m_AlignZero Selected X.tif)
+![m_AlignZero Selected X](img/m_AlignZero Selected X.png)
 
 Aligns selected vertices to the origin on the X axis.
 
 ### m_AlignZero Selected Y.py
 
-![m_AlignZero Selected Y](m_AlignZero Selected Y.tif)
+![m_AlignZero Selected Y](img/m_AlignZero Selected Y.png)
 
 Aligns selected vertices to the origin on the Y axis.
 
 ### m_AlignZero Selected Z.py
 
-![m_AlignZero Selected Z](m_AlignZero Selected Z.tif)
+![m_AlignZero Selected Z](img/m_AlignZero Selected Z.png)
 
 Aligns selected vertices to the origin on the Z axis.
 
 ### m_AnimCurve_RepeatAfter.py
 
-![m_AnimCurve_RepeatAfter](m_AnimCurve_RepeatAfter.tif)
+![m_AnimCurve_RepeatAfter](img/m_AnimCurve_RepeatAfter.png)
 
 Repeats the animation curve after and before.
 
 ### m_BoundingBox_SelectedObjects.py
 
-![m_BoundingBox_SelectedObjects](m_BoundingBox_SelectedObjects.tif)
+![m_BoundingBox_SelectedObjects](img/m_BoundingBox_SelectedObjects.png)
 
 Creates a bounding box around selected objects.
 
 ### m_CameraGridToggle_01.py
 
-![m_CameraGridToggle_01](m_CameraGridToggle_01.tif)
+![m_CameraGridToggle_01](img/m_CameraGridToggle_01.png)
 
 Toggles the camera grid on and off.
 
 ### m_CopyMaterialTags_Hierarchy.py
 
-![m_CopyMaterialTags_Hierarchy](m_CopyMaterialTags_Hierarchy.tif)
+![m_CopyMaterialTags_Hierarchy](img/m_CopyMaterialTags_Hierarchy.png)
 
 Copies material tags from one hierarchy to another with the same objects.
 
 ### m_CopyColortoChild.py
 
-![m_CopyColortoChild](m_CopyColortoChild.tif)
+![m_CopyColortoChild](img/m_CopyColortoChild.png)
 
 Copies the display color from the parent to the children of selected objects.
 
 ### m_copyDisplayColor.py
 
-![m_copyDisplayColor](m_copyDisplayColor.tif)
+![m_copyDisplayColor](img/m_copyDisplayColor.png)
 
 Copies the display color from the first selected object to the second selected object.
 
 ### m_FFD_SelectedObjs.py
 
-![m_FFD_SelectedObjs](m_FFD_SelectedObjs.tif)
+![m_FFD_SelectedObjs](img/m_FFD_SelectedObjs.png)
 
 Adds an FFD object to selected objects.
 
 ### m_FFD to nulls_01.py
 
-![m_FFD to nulls_01](m_FFD to nulls_01.tif)
+![m_FFD to nulls_01](img/m_FFD to nulls_01.png)
 
 Converts FFD points to nulls.
 
 ### m_Paste as child.py
 
-![m_Paste as child](m_Paste as child.tif)
+![m_Paste as child](img/m_Paste as child.png)
 
 Pastes objects as children of the current selection.
 
 ### m_HierarchyMoveDN.py
 
-![m_HierarchyMoveDN](m_HierarchyMoveDN.tif)
+![m_HierarchyMoveDN](img/m_HierarchyMoveDN.png)
 
 Moves selected objects down in the hierarchy.
 
 ### m_RenderSet 1-1.py
 
-![m_RenderSet 1-1](m_RenderSet 1-1.tif)
+![m_RenderSet 1-1](img/m_RenderSet 1-1.png)
 
 Sets the render resolution to 1920x1920.
 
 ### m_HierarchyMoveUP.py
 
-![m_HierarchyMoveUP](m_HierarchyMoveUP.tif)
+![m_HierarchyMoveUP](img/m_HierarchyMoveUP.png)
 
 Moves selected objects up in the hierarchy.
 
 ### m_PasteNexto.py
 
-![m_PasteNexto](m_PasteNexto.tif)
+![m_PasteNexto](img/m_PasteNexto.png)
 
 Pastes objects next to the selected object in the object manager.
 
 ### m_RenderSet_ResDiv2.py
 
-![m_RenderSet_ResDiv2](m_RenderSet_ResDiv2.tif)
+![m_RenderSet_ResDiv2](img/m_RenderSet_ResDiv2.png)
 
 Divides the frame resolution by 2.
 
 ### m_RenderSet_ResMult2.py
 
-![m_RenderSet_ResMult2](m_RenderSet_ResMult2.tif)
+![m_RenderSet_ResMult2](img/m_RenderSet_ResMult2.png)
 
 Multiplies the frame resolution by 2.
 
 ### m_RenderSet 9-16.py
 
-![m_RenderSet 9-16](m_RenderSet 9-16.tif)
+![m_RenderSet 9-16](img/m_RenderSet 9-16.png)
 
 Sets the render resolution to 1080x1920.
 
 ### m_RenderSet 16-9.py
 
-![m_RenderSet 16-9](m_RenderSet 16-9.tif)
+![m_RenderSet 16-9](img/m_RenderSet 16-9.png)
 
 Sets the render resolution to 1920x1080.
 
 ### m_RenderSet_CurrentFrame.py
 
-![m_RenderSet_CurrentFrame](m_RenderSet_CurrentFrame.tif)
+![m_RenderSet_CurrentFrame](img/m_RenderSet_CurrentFrame.png)
 
 Sets the frame range to "Current Frame".
 
 ### m_RenderSet_PreviewRange.py
 
-![m_RenderSet_PreviewRange](m_RenderSet_PreviewRange.tif)
+![m_RenderSet_PreviewRange](img/m_RenderSet_PreviewRange.png)
 
 Sets the frame range to "Preview Range".
 
 ### m_RenderSet_Save ON OFF.py
 
-![m_RenderSet_Save ON OFF](m_RenderSet_Save ON OFF.tif)
+![m_RenderSet_Save ON OFF](img/m_RenderSet_Save ON OFF.png)
 
 Toggles the save output on and off.
 
 ### m_RenderSet_Save ON OFF_v02.py
 
-![m_RenderSet_Save ON OFF_v02](m_RenderSet_Save ON OFF_v02.tif)
+![m_RenderSet_Save ON OFF_v02](img/m_RenderSet_Save ON OFF_v02.png)
 
 Toggles the save output on and off with a command plugin.
 
 ### m_Reset Visibility.py
 
-![m_Reset Visibility](m_Reset Visibility.tif)
+![m_Reset Visibility](img/m_Reset Visibility.png)
 
 Resets the visibility of selected objects.
 
 ### m_ResetRotation.py
 
-![m_ResetRotation](m_ResetRotation.tif)
+![m_ResetRotation](img/m_ResetRotation.png)
 
 Resets the rotation of selected objects.
 
 ### m_rset_SamplingLower.py
 
-![m_rset_SamplingLower](m_rset_SamplingLower.tif)
+![m_rset_SamplingLower](img/m_rset_SamplingLower.png)
 
 Lowers the sampling threshold for Redshift renderer.
 
 ### m_rset_SamplingCTRL.py
 
-![m_rset_SamplingCTRL](m_rset_SamplingCTRL.tif)
+![m_rset_SamplingCTRL](img/m_rset_SamplingCTRL.png)
 
 Controls the sampling threshold for Redshift renderer with keyboard modifiers.
 
 ### m_rsSet_Bucket64.py
 
-![m_rsSet_Bucket64](m_rsSet_Bucket64.tif)
+![m_rsSet_Bucket64](img/m_rsSet_Bucket64.png)
 
 Sets the Redshift bucket size to 64.
 
 ### m_rsSet_CutoffThresholds_Q.py
 
-![m_rsSet_CutoffThresholds_Q](m_rsSet_CutoffThresholds_Q.tif)
+![m_rsSet_CutoffThresholds_Q](img/m_rsSet_CutoffThresholds_Q.png)
 
 Sets the cutoff thresholds for Redshift renderer.
 
 ### m_rsSet_Bucket512.py
 
-![m_rsSet_Bucket512](m_rsSet_Bucket512.tif)
+![m_rsSet_Bucket512](img/m_rsSet_Bucket512.png)
 
 Sets the Redshift bucket size to 512.
 
 ### m_rsSet_SamplingThresh_0x01.py
 
-![m_rsSet_SamplingThresh_0x01](m_rsSet_SamplingThresh_0x01.tif)
+![m_rsSet_SamplingThresh_0x01](img/m_rsSet_SamplingThresh_0x01.png)
 
 Sets the Redshift sampling threshold to 0.01.
 
 ### m_rsSet_SamplingThresh_0x005.py
 
-![m_rsSet_SamplingThresh_0x005](m_rsSet_SamplingThresh_0x005.tif)
+![m_rsSet_SamplingThresh_0x005](img/m_rsSet_SamplingThresh_0x005.png)
 
 Sets the Redshift sampling threshold to 0.005.
 
 ### m_rsSet_SamplingThresh_0x1.py
 
-![m_rsSet_SamplingThresh_0x1](m_rsSet_SamplingThresh_0x1.tif)
+![m_rsSet_SamplingThresh_0x1](img/m_rsSet_SamplingThresh_0x1.png)
 
 Sets the Redshift sampling threshold to 0.1.
 
 ### m_rsSet_SamplingThresh_1.py
 
-![m_rsSet_SamplingThresh_1](m_rsSet_SamplingThresh_1.tif)
+![m_rsSet_SamplingThresh_1](img/m_rsSet_SamplingThresh_1.png)
 
 Sets the Redshift sampling threshold to 1.
 
 ### m_ViewportClean_01.py
 
-![m_ViewportClean_01](m_ViewportClean_01.tif)
+![m_ViewportClean_01](img/m_ViewportClean_01.png)
 
 Cleans up the viewport by toggling various display options.
 
 ### m_Select Children.py
 
-![m_Select Children](m_Select Children.tif)
+![m_Select Children](img/m_Select Children.png)
 
 Selects the children of the selected objects.
 
 ### m_SwapIndexNumber.py
 
-![m_SwapIndexNumber](m_SwapIndexNumber.tif)
+![m_SwapIndexNumber](img/m_SwapIndexNumber.png)
 
 Swaps the index number of points.
 
 ### Points2Circle.py
 
-![Points2Circle](Points2Circle.tif)
+![Points2Circle](img/Points2Circle.png)
 
 Converts selected points to a circle.
 
 ### point_autorig.py
 
-![point_autorig](point_autorig.tif)
+![point_autorig](img/point_autorig.png)
 
 Automatically rigs points with nulls.
 
 ### Remove Empty Nulls.py
 
-![Remove Empty Nulls](Remove Empty Nulls.tif)
+![Remove Empty Nulls](img/Remove Empty Nulls.png)
 
 Removes empty null objects from the scene.
 
 ### RenderAllFrames.py
 
-![RenderAllFrames](RenderAllFrames.tif)
+![RenderAllFrames](img/RenderAllFrames.png)
 
 Sets the render frame sequence to all frames.
 
 ### Visibility Off.py
 
-![Visibility Off](Visibility Off.tif)
+![Visibility Off](img/Visibility Off.png)
 
 Turns off the visibility of selected objects.
 
 ### RenderCurrentFrame.py
 
-![RenderCurrentFrame](RenderCurrentFrame.tif)
+![RenderCurrentFrame](img/RenderCurrentFrame.png)
 
 Sets the render frame sequence to the current frame.
 
 ### Visibility Tog_01.py
 
-![Visibility Tog_01](Visibility Tog_01.tif)
+![Visibility Tog_01](img/Visibility Tog_01.png)
 
 Toggles the visibility of selected objects.
 
 ### Vis2.py
 
-![Vis2](Vis2.tif)
+![Vis2](img/Vis2.png)
 
 Toggles the visibility of selected objects.
 
 ### m_RandomColor_Group.py
 
-![m_RandomColor_Group](m_RandomColor_Group.tif)
+![m_RandomColor_Group](img/m_RandomColor_Group.png)
 
 Sets a random display color to the current object or tag selection.
 

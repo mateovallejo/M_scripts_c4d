@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Toggle selected objects visibility On/Off.
+"""
+
 import c4d
 from c4d import BaseObject
 

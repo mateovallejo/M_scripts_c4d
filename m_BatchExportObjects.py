@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Batch export selected objects to file root as selected format.
+"""
+
 import c4d, os
 import c4d.documents as docs
 from c4d import gui
@@ -59,8 +66,8 @@ def exportItems(objList, setupFolder, fileFormatEnding, cmdNr):
     for obj in objList:
         # check type
         if not isinstance(obj, c4d.BaseObject):
-            print "Expected c4d.BaseObject, got %s." % obj.__class__.__name__ + " attached to: " \
-                  + obj.GetObject().GetName()
+            print("Expected c4d.BaseObject, got %s." % obj.__class__.__name__ + " attached to: " \
+                  + obj.GetObject().GetName())
         else:
             # some list-stuff
             tmpList.insert(0, obj)
@@ -77,10 +84,10 @@ def exportItems(objList, setupFolder, fileFormatEnding, cmdNr):
             itemCounter += 1
 
     if itemCounter == saveCounter:
-        print itemCounter, saveCounter
+        print(itemCounter, saveCounter)
         gui.MessageDialog(str(itemCounter) + "  Selected items saved to: " + setupFolder)
     else:
-        print itemCounter, saveCounter
+        print(itemCounter, saveCounter)
         gui.MessageDialog("Something went wrong!\n" + "Out of " + str(itemCounter) + " items, "
                           + str(saveCounter) + " were saved to " + setupFolder)
 

@@ -1,3 +1,9 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US: Converts the FFD vertices into Null objects.
+"""
 import c4d
 
 def main():

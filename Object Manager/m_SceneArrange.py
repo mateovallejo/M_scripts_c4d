@@ -17,26 +17,30 @@ def gather_objects(root):
         root = root.GetNext()
     return objects
 
-def get_or_create_null(doc, null_name):
+def get_or_create_null(doc, null_name, display_color):
     """
     Busca un objeto null con el nombre indicado. Si no lo encuentra, lo crea,
-    lo inserta en el documento, asigna el icono especificado y registra su creación en el undo.
+    lo inserta en el documento, asigna el icono especificado, configura el display color 
+    y el icon colorize mode, y registra su creación en el undo.
     """
     existing = doc.SearchObject(null_name)
     if existing:
+        # Si ya existe, se actualizan los parámetros deseados.
+        existing.SetParameter(c4d.ID_BASELIST_ICON_FILE, "1052838", c4d.DESCFLAGS_SET_0)
+        existing[c4d.ID_BASELIST_ICON_COLOR] = display_color
         return existing
 
     new_null = c4d.BaseObject(c4d.Onull)
     new_null.SetName(null_name)
     
-    # Inserta el objeto en el documento antes de asignar el icono
+    # Inserta el objeto en el documento y registra el undo.
     doc.InsertObject(new_null)
     doc.AddUndo(c4d.UNDOTYPE_NEW, new_null)
     
-    # Asigna el icono utilizando SetParameter(). Nota:
-    # c4d.ID_BASELIST_ICON_FILE espera un string. En el script de ejemplo se usó "1052838"
-    # (si fuese un icono interno puede ser necesario el prefijo '#' antes del ID).
+    # Asigna el icono y configura el display color y el icon colorize mode.
     new_null.SetParameter(c4d.ID_BASELIST_ICON_FILE, "1052838", c4d.DESCFLAGS_SET_0)
+    new_null[c4d.ID_BASELIST_ICON_COLORIZE_MODE] = 2
+    new_null[c4d.ID_BASELIST_ICON_COLOR] = display_color
     new_null.Message(c4d.MSG_UPDATE)  # Forzar la actualización del objeto
     
     return new_null
@@ -64,18 +68,24 @@ def branch_contains_cloner(obj):
         current = current.GetUp()
     return False
 
+def rgb_to_vector(r, g, b):
+    """
+    Convierte valores RGB (0-255) a un c4d.Vector con valores en el rango 0-1.
+    """
+    return c4d.Vector(r / 255.0, g / 255.0, b / 255.0)
+
 def main():
     doc = c4d.documents.GetActiveDocument()
     
     # Inicia un grupo de undo para toda la operación.
     doc.StartUndo()
 
-    # Obtiene o crea los nulls de agrupación y registra su creación si son nuevos.
-    lightsNull     = get_or_create_null(doc, "Lights")
-    geoNull        = get_or_create_null(doc, "Geometry")
-    camerasNull    = get_or_create_null(doc, "Cameras")
-    generatorsNull = get_or_create_null(doc, "Generators")
-    splinesNull    = get_or_create_null(doc, "Splines")  # Grupo para splines
+    # Obtiene o crea los nulls de agrupación, asignándoles un color de display (en formato RGB).
+    lightsNull     = get_or_create_null(doc, "Lights",     rgb_to_vector(255, 255, 0))   # Amarillo
+    geoNull        = get_or_create_null(doc, "Geometry",   rgb_to_vector(70, 250, 200)) # Turquesa
+    camerasNull    = get_or_create_null(doc, "Cameras",    rgb_to_vector(255, 60, 80))     # Rojo
+    generatorsNull = get_or_create_null(doc, "Generators", rgb_to_vector(108, 229, 130))   # Verde Claro
+    splinesNull    = get_or_create_null(doc, "Splines",    rgb_to_vector(140, 220, 250))     # Celeste
 
     # Lista de nulls de agrupación para excluirlos al buscar el padre superior.
     groupNulls = [lightsNull, geoNull, camerasNull, generatorsNull, splinesNull]
@@ -95,6 +105,24 @@ def main():
         c4d.Ospline4side,
         c4d.Osplineflower,
         c4d.Osplinecogwheel
+    ]
+    
+    # Definimos los tipos de primitivos.
+    primitive_types = [
+        c4d.Ocube,
+        c4d.Osphere,
+        c4d.Ocylinder,
+        c4d.Ocone,
+        c4d.Oplane,
+        c4d.Opyramid,
+        c4d.Otorus,
+        c4d.Otube,
+        c4d.Ocapsule,
+        c4d.Ofractal,
+        c4d.Odisc,
+        c4d.Oplatonic,
+        c4d.Ofigure,
+        c4d.Opolygon  # Se incluye Opolygon en caso de que se considere primitivo en el contexto
     ]
 
     # Recopila todos los objetos de la escena.
@@ -124,11 +152,8 @@ def main():
                 group = splinesNull
                 # Mensaje de depuración:
                 print("Spline detectado:", obj.GetName(), "Tipo:", obj.GetType())
-            elif (obj.CheckType(c4d.Opolygon) or
-                  obj.CheckType(c4d.Ocube) or
-                  obj.CheckType(c4d.Osphere) or
-                  obj.CheckType(c4d.Ocylinder) or
-                  obj.CheckType(c4d.Ocone)):
+            # Comprueba si el objeto es de alguno de los tipos de primitivos.
+            elif any(obj.CheckType(primitive_type) for primitive_type in primitive_types):
                 group = geoNull
 
         if group:

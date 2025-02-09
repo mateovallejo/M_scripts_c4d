@@ -80,17 +80,20 @@ def main():
     # Inicia un grupo de undo para toda la operación.
     doc.StartUndo()
 
-    # Obtiene o crea los nulls de agrupación, asignándoles un color de display (en formato RGB).
-    lightsNull     = get_or_create_null(doc, "Lights",     rgb_to_vector(255, 255, 0))   # Amarillo
-    geoNull        = get_or_create_null(doc, "Geometry",   rgb_to_vector(70, 250, 200)) # Turquesa
-    camerasNull    = get_or_create_null(doc, "Cameras",    rgb_to_vector(255, 60, 80))     # Rojo
-    generatorsNull = get_or_create_null(doc, "Generators", rgb_to_vector(108, 229, 130))   # Verde Claro
-    splinesNull    = get_or_create_null(doc, "Splines",    rgb_to_vector(140, 220, 250))     # Celeste
+    # Diccionario que contendrá los nulls de agrupación creados (solo se crean si se asigna algún objeto)
+    groups = {}
+    # Datos de cada categoría: nombre (clave) y color de display.
+    groups_info = {
+        "Lights":     rgb_to_vector(255, 255, 0),    # Amarillo
+        "Geometry":   rgb_to_vector(70, 250, 200),   # Turquesa
+        "Cameras":    rgb_to_vector(255, 60, 80),     # Rojo
+        "Generators": rgb_to_vector(108, 229, 130),   # Verde Claro
+        "Splines":    rgb_to_vector(140, 220, 250)    # Celeste
+    }
+    # Lista de nulls de agrupación ya creados (se usará en GetTopParent)
+    groupNulls = []
 
-    # Lista de nulls de agrupación para excluirlos al buscar el padre superior.
-    groupNulls = [lightsNull, geoNull, camerasNull, generatorsNull, splinesNull]
-
-    # Definimos los tipos de spline conocidos (incluye splines primitivas y convencionales).
+    # Definición de tipos de spline conocidos (incluye splines primitivas y convencionales).
     spline_types = [
         c4d.Ospline,
         c4d.Osplinerectangle,
@@ -107,7 +110,7 @@ def main():
         c4d.Osplinecogwheel
     ]
     
-    # Definimos los tipos de primitivos.
+    # Definición de tipos de primitivos.
     primitive_types = [
         c4d.Ocube,
         c4d.Osphere,
@@ -133,43 +136,48 @@ def main():
     moved = set()
 
     for obj in allObjects:
-        # Se ignoran los propios nulls de agrupación.
-        if obj in groupNulls:
+        # Se omiten los nulls de agrupación ya existentes (se identifican por su nombre y que sean Onull)
+        if obj.CheckType(c4d.Onull) and obj.GetName() in groups_info:
             continue
 
-        group = None
-        # Si en la rama se encuentra un cloner, se asigna al grupo "Generators".
+        group_key = None
+        # Asignación según el tipo del objeto.
         if branch_contains_cloner(obj):
-            group = generatorsNull
+            group_key = "Generators"
+        elif obj.CheckType(c4d.Ocamera) or obj.CheckType(c4d.Orscamera):
+            group_key = "Cameras"
+        elif obj.CheckType(c4d.Olight) or obj.CheckType(c4d.Orslight):
+            group_key = "Lights"
+        elif any(obj.CheckType(spline_type) for spline_type in spline_types):
+            group_key = "Splines"
+            # Mensaje de depuración:
+            print("Spline detectado:", obj.GetName(), "Tipo:", obj.GetType())
+        elif any(obj.CheckType(primitive_type) for primitive_type in primitive_types):
+            group_key = "Geometry"
+
+        if group_key:
+            # Si el null para esta categoría aún no se ha creado, se crea en este momento.
+            if group_key not in groups:
+                groups[group_key] = get_or_create_null(doc, group_key, groups_info[group_key])
+                groupNulls.append(groups[group_key])
+            group = groups[group_key]
         else:
-            # Asignación según el tipo del objeto.
-            if obj.CheckType(c4d.Ocamera) or obj.CheckType(c4d.Orscamera):
-                group = camerasNull
-            elif obj.CheckType(c4d.Olight) or obj.CheckType(c4d.Orslight):
-                group = lightsNull
-            # Comprueba si el objeto es de alguno de los tipos de spline.
-            elif any(obj.CheckType(spline_type) for spline_type in spline_types):
-                group = splinesNull
-                # Mensaje de depuración:
-                print("Spline detectado:", obj.GetName(), "Tipo:", obj.GetType())
-            # Comprueba si el objeto es de alguno de los tipos de primitivos.
-            elif any(obj.CheckType(primitive_type) for primitive_type in primitive_types):
-                group = geoNull
+            group = None
 
         if group:
-            # Obtiene el objeto raíz de la rama (excluyendo los nulls de agrupación).
+            # Obtiene el objeto raíz de la rama (excluyendo los nulls de agrupación ya creados).
             top = GetTopParent(obj, groupNulls)
             if id(top) in moved:
                 continue
 
-            # Guarda el padre original para que, al deshacer, se restaure la jerarquía.
+            # Registra el cambio de jerarquía para deshacer la operación.
             oldParent = top.GetUp()
             if oldParent:
                 doc.AddUndo(c4d.UNDOTYPE_CHANGE, oldParent)
             doc.AddUndo(c4d.UNDOTYPE_CHANGE, top)
             doc.AddUndo(c4d.UNDOTYPE_CHANGE, group)
 
-            # Mueve la rama: remueve el objeto y lo inserta bajo el grupo correspondiente.
+            # Mueve la rama: remueve el objeto y lo inserta bajo el null correspondiente.
             top.Remove()
             top.InsertUnder(group)
 

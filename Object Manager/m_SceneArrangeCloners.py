@@ -25,17 +25,24 @@ def rgb_to_vector(r, g, b):
 def main():
     doc = c4d.documents.GetActiveDocument()
     doc.StartUndo()
-    
-    firstObj = doc.GetFirstObject()
-    if firstObj is None:
-        doc.EndUndo()
-        c4d.EventAdd()
-        return
-    
-    # Recopila todos los objetos de la escena
-    allObjects = gather_objects(firstObj)
-    # Filtra los cloners (MoGraph Cloner)
-    cloners = [obj for obj in allObjects if obj.CheckType(c4d.OmographCloner)]
+
+    # Determinar el rango de objetos a procesar:
+    # Si hay objetos seleccionados, se usan estos y sus hijos; de lo contrario, se recorre toda la escena.
+    selected_objs = doc.GetActiveObjects(0)
+    if selected_objs:
+        objects = []
+        for obj in selected_objs:
+            objects.extend(gather_objects(obj))
+    else:
+        firstObj = doc.GetFirstObject()
+        if firstObj is None:
+            doc.EndUndo()
+            c4d.EventAdd()
+            return
+        objects = gather_objects(firstObj)
+
+    # Filtra los cloners (MoGraph Cloner) de la lista de objetos a procesar
+    cloners = [obj for obj in objects if obj.CheckType(c4d.OmographCloner)]
     
     for cloner in cloners:
         # Crea un null (grupo) con el mismo nombre que el cloner
@@ -58,7 +65,7 @@ def main():
         doc.AddUndo(c4d.UNDOTYPE_CHANGE, cloner)
         cloner.InsertUnder(groupNull)
         
-        # Obtiene el objeto InExcludeData que contiene los effectors
+        # Obtiene el objeto que contiene los effectors
         effectors = []
         effector_data = cloner[c4d.ID_MG_MOTIONGENERATOR_EFFECTORLIST]
         if effector_data:

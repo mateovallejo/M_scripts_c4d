@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Sets RS renderer bucket size to 512.
+"""
+
 import c4d
 import c4d.documents
 import redshift

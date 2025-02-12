@@ -1,3 +1,9 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Resets the rotation of each selected object to zero.
+"""
 import c4d
 from c4d import gui
 

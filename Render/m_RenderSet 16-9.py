@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 0.1.0
+Description-US:Set resolution to 1920 x 1080.
+"""
+
 import c4d
 
 

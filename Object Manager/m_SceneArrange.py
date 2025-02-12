@@ -1,3 +1,9 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Groups objects in the scene into categories under new null objects.
+"""
 import c4d
 import redshift as rs  # Asegúrate de que el módulo Redshift esté disponible
 

@@ -1,3 +1,9 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Groups each selected cloner and its effectors under a new null object.
+"""
 import c4d
 
 # Fallback: si c4d no tiene OmographCloner, se define

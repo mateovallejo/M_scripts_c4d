@@ -1,6 +1,15 @@
-# Cinema 4D Python Scripts
+<style>
+.icon {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  padding-right: 10px;
+}
+</style>
 
-This repository contains a collection of Python scripts for use with Cinema 4D. These scripts provide various functionalities to enhance your workflow in Cinema 4D.
+# m_Scripts_1.0 C4D
+
+A collection of Python scripts for Cinema 4D. These scripts provide various functionalities to enhance and speedup your workflow. Some are mostly shorcuts to simple tasks.
 
 ## Table of Contents
 
@@ -8,328 +17,241 @@ This repository contains a collection of Python scripts for use with Cinema 4D. 
 - [Usage](#usage)
 - [Scripts](#scripts)
   - [Animation](#animation)
-    - [AnimCurve Constant](#animationm_animcurve_constantpy)
-    - [AnimCurve Repeat After](#animationm_animcurve_repeatafterpy)
   - [Modeling](#modeling)
-    - [Align Selected X](#modelingm_align-selected-xpy)
-    - [Align Selected Y](#modelingm_align-selected-ypy)
-    - [Align Selected Z](#modelingm_align-selected-zpy)
-    - [Align To Selected](#modelingm_aligntoselectedpy)
-    - [Align Zero Selected X](#modelingm_alignzero-selected-xpy)
-    - [Align Zero Selected Y](#modelingm_alignzero-selected-ypy)
-    - [Align Zero Selected Z](#modelingm_alignzero-selected-zpy)
   - [Object Manager](#object-manager)
-    - [Copy Display Color](#object-managerm_copydisplaycolorpy)
-    - [Copy Color to Child](#object-managerm_copycolortochildpy)
-    - [Copy Material Tags Hierarchy](#object-managerm_copymaterialtags_hierarchypy)
-    - [Paste Next to](#object-managerm_pastenextopy)
-    - [Select Children](#object-managerm_select-childrenpy)
-    - [Scene Arrange](#object-managerm_scenearrangepy)
-    - [Scene Arrange Cloners](#object-managerm_scenearrangeclonerspy)
-    - [Reset Visibility](#object-managerm_reset-visibilitypy)
-    - [Reset Rotation](#object-managerm_resetrotationpy)
-    - [Visibility Toggle](#object-managerm_visibilitytogglepy)
   - [Render](#render)
-    - [Render Set 1-1](#renderm_renderset-1-1py)
-    - [Render Set 16-9](#renderm_renderset-16-9py)
-    - [Render Set 9-16](#renderm_renderset-9-16py)
-    - [Render Set Current Frame](#renderm_renderset_currentframepy)
-    - [Render Set Preview Range](#renderm_renderset_previewrangepy)
-    - [Render Set Save ON OFF](#renderm_renderset_save-on-offpy)
-    - [Render Set Save ON OFF v02](#renderm_renderset_save-on-off_v02py)
-    - [Sampling Lower](#renderm_rset_samplinglowerpy)
-    - [Sampling CTRL](#renderm_rset_samplingctrlpy)
-    - [Bucket 64](#renderm_rsset_bucket64py)
-    - [Cutoff Thresholds Q](#renderm_rsset_cutoffthresholds_qpy)
-    - [Bucket 512](#renderm_rsset_bucket512py)
-    - [Sampling Thresh 0x01](#renderm_rsset_samplingthresh_0x01py)
-    - [Sampling Thresh 0x005](#renderm_rsset_samplingthresh_0x005py)
-    - [Sampling Thresh 0x1](#renderm_rsset_samplingthresh_0x1py)
-    - [Sampling Thresh 1](#renderm_rsset_samplingthresh_1py)
   - [Utility](#utility)
-    - [Convert Hair to Spline](#utilityconvert-hair-to-splinepy)
-    - [Bounding Box Selected Objects](#utilitym_boundingbox_selectedobjectspy)
-    - [Camera Grid Toggle](#utilitym_cameragridtoggle_01py)
-    - [FFD Selected Objects](#utilitym_ffd_selectedobjspy)
-    - [FFD to Nulls](#utilitym_ffd-to-nulls_01py)
-    - [Paste as Child](#utilitym_paste-as-childpy)
-    - [Hierarchy Move Down](#utilitym_hierarchymovednpy)
-    - [Hierarchy Move Up](#utilitym_hierarchymoveuppy)
-    - [Viewport Clean](#utilitym_viewportclean_01py)
-    - [Swap Index Number](#utilitym_swapindexnumberpy)
-    - [Points to Circle](#utilitypoints2circlepy)
-    - [Point Auto Rig](#utilitypoint_autorigpy)
-    - [Remove Empty Nulls](#utilityremove-empty-nullspy)
-    - [Random Color Group](#utilitym_randomcolor_grouppy)
-    - [Batch Export Objects](#utilitym_batchexportobjectspy)
-    - [FFD Selected Verts](#utilitym_ffd_selectedvertspy)
-    - [Car Generator](#utilitym_cargeneratorpy)
-    - [FFD to Nulls](#utilitym_ffd_to_nullspy)
-    - [FFD Selected Objs](#utilitym_ffd_selectedobjspy)
-    - [Hierarchy Move DN](#utilitym_hierarchymovednpy)
-    - [Hierarchy Move UP](#utilitym_hierarchymoveuppy)
-    - [Paste as Child](#utilitym_paste_as_childpy)
-    - [Viewport Clean](#utilitym_viewportclean_01py)
 
-## Installation
+# Installation
 
 Download or clone this repository to your local machine.
 
 #### Windows
-`C:\Users\<USER>\AppData\Roaming\MAXON\Maxon Cinema 4D 2024\library\scripts`
+`C:\Users\<USER>\AppData\Roaming\MAXON\Maxon Cinema 4D 2025\library\scripts`
 
 #### Mac OS
-`/Applications/MAXON/CINEMA 4D 2024/library/scripts`
+`/Applications/MAXON/CINEMA 4D 2025/library/scripts`
 
 ### Using scripts
 After you have installed m_Scripts you have to reboot Cinema 4D if it is already running. Scripts are located under Extensions -> User Scripts -> M_Scripts_#.##. Scripts can be used with the commander (Shift+C) too.
 
 Some of the scripts have multiple functions and you can use those with key modifiers (Alt / Ctrl / Shift) and different combinations. Some of the scripts requires a certain item selection or mode to be active. If you don't know what the script does you can either open the script in the script editor and read the description or search the info of the specific script on this page.
 
-## Scripts
+# Scripts Overview
 
-### Animation
+## Animation
 
-#### AnimCurve Constant
+#### <img src="img/m_AnimCurve_Constant.png" alt="AnimCurve Constant" class="icon"> AnimCurve Constant
 
-Repeats the animation curve after and before.
+*-* Makes the animation curve constant before and after.
 
-#### AnimCurve Repeat After
+#### <img src="img/m_AnimCurve_RepeatAfter.png" alt="AnimCurve Repeat After" class="icon"> AnimCurve Repeat After
 
-Repeats the animation curve after and before.
+*-* Repeats the animation curve before and after.
 
-### Modeling
+## Modeling
 
-#### Align Selected X
+#### <img src="img/m_AlignSelected_X.png" alt="Align Selected X" class="icon"> Align Selected X
 
-Aligns selected vertices on the X axis.
+*-* Aligns selected vertices on the X axis.
 
-#### Align Selected Y
+#### <img src="img/m_AlignSelected_Y.png" alt="Align Selected Y" class="icon"> Align Selected Y
 
-Aligns selected vertices on the Y axis.
+*-* Aligns selected vertices on the Y axis.
 
-#### Align Selected Z
+#### <img src="img/m_AlignSelected_Z.png" alt="Align Selected Z" class="icon"> Align Selected Z
 
-Aligns selected vertices on the Z axis.
+*-* Aligns selected vertices on the Z axis.
 
-#### Align To Selected
+#### <img src="img/m_AlignZeroSelected_X.png" alt="Align Zero Selected X" class="icon"> Align Zero Selected X
 
-Aligns the first selected object to the second selected object.
+*-* Aligns selected vertices to the origin on the X axis.
 
-#### Align Zero Selected X
+#### <img src="img/m_AlignZeroSelected_Y.png" alt="Align Zero Selected Y" class="icon"> Align Zero Selected Y
 
-Aligns selected vertices to the origin on the X axis.
+*-* Aligns selected vertices to the origin on the Y axis.
 
-#### Align Zero Selected Y
+#### <img src="img/m_AlignZeroSelected_Z.png" alt="Align Zero Selected Z" class="icon"> Align Zero Selected Z
 
-Aligns selected vertices to the origin on the Y axis.
+*-* Aligns selected vertices to the origin on the Z axis.
 
-#### Align Zero Selected Z
 
-Aligns selected vertices to the origin on the Z axis.
+## Object Manager
 
-### Object Manager
+#### <img src="img/m_AlignToSelected.png" alt="Align To Selected" class="icon"> Align To Selected
 
-#### Copy Display Color
+*-* Aligns the first selected object to the second selected object.
 
-Copies the display color from the first selected object to the second selected object.
+#### <img src="img/m_CopyDisplayColor.png" alt="Copy Display Color" class="icon"> Copy Display Color
 
-#### Copy Color to Child
+*-* Copies the display color from the first selected object to the second selected object.
 
-Copies the display color from the parent to the children of selected objects.
+#### <img src="img/m_CopyColortoChild.png" alt="Copy Color to Child" class="icon"> Copy Color to Child
 
-#### Copy Material Tags Hierarchy
+*-* Copies the display color from the parent to the children of selected objects.
 
-Copies material tags from one hierarchy to another with the same objects.
+#### <img src="img/m_RandomColor_Group.png" alt="Random Color Group" class="icon"> Random Color Group
 
-#### Paste Next to
+*-* Sets a random display color to the current object or tag selection.
 
-Pastes objects next to the selected object in the object manager.
+#### <img src="img/m_CopyMaterialTags_Hierarchy.png" alt="Copy Material Tags Hierarchy" class="icon"> Copy Material Tags Hierarchy
 
-#### Select Children
+*-* Copies material tags from one hierarchy to another with the same objects.
 
-Selects the children of the selected objects.
+#### <img src="img/m_PasteNexto.png" alt="Paste Next to" class="icon"> Paste Next to
 
-#### Scene Arrange
+*-* Pastes objects next to the selected object in the object manager. *Recommended to use with shortcut*
 
-Arranges the scene objects.
+#### <img src="img/m_Pasteaschild.png" alt="Paste as Child" class="icon"> Paste as Child
 
-#### Scene Arrange Cloners
+*-* Pastes objects as children of the current selection. *Recommended to use with shortcut*
 
-Arranges the scene cloners.
+#### <img src="img/m_SelectChildren.png" alt="Select Children" class="icon"> Select Children
 
-#### Reset Visibility
+*-* Selects the children of the selected objects.
 
-Resets the visibility of selected objects.
+#### <img src="img/m_HierarchyMoveDn.png" alt="Hierarchy Move Down" class="icon"> Hierarchy Move Down
 
-#### Reset Rotation
+*-* Moves selected objects down in the hierarchy.
 
-Resets the rotation of selected objects.
+#### <img src="img/m_HierarchyMoveUp.png" alt="Hierarchy Move Up" class="icon"> Hierarchy Move Up
 
-#### Visibility Toggle
+*-* Moves selected objects up in the hierarchy.
 
-Toggles the visibility of selected objects.
+#### <img src="img/m_SceneArrange.png" alt="Scene Arrange" class="icon"> Scene Arrange
 
-### Render
+*-* Groups objects in the scene into categories under new null objects. *Still needs some improvement*
 
-#### Render Set 1-1
+#### <img src="img/m_SceneArrangeCloners.png" alt="Scene Arrange Cloners" class="icon"> Scene Arrange Cloners
 
-Sets the render resolution to 1920x1920.
+*-* Groups each selected cloner and its effectors under a new null object.
 
-#### Render Set 16-9
+## Render Setup
 
-Sets the render resolution to 1920x1080.
+#### <img src="img/m_RenderSetup_1-1.png" alt="Render Set 1-1" class="icon"> Render Set 1-1
 
-#### Render Set 9-16
+*-* Sets the render resolution to 1920x1920.
 
-Sets the render resolution to 1080x1920.
+#### <img src="img/m_RenderSetup_16-9.png" alt="Render Set 16-9" class="icon"> Render Set 16-9
 
-#### Render Set Current Frame
+*-* Sets the render resolution to 1920x1080.
 
-Sets the frame range to "Current Frame".
+#### <img src="img/m_RenderSetup_9-16.png" alt="Render Set 9-16" class="icon"> Render Set 9-16
 
-#### Render Set Preview Range
+*-* Sets the render resolution to 1080x1920.
 
-Sets the frame range to "Preview Range".
+#### <img src="img/m_RenderSetup_CurrentFrame.png" alt="Render Set Current Frame" class="icon"> Render Set Current Frame
 
-#### Render Set Save ON OFF
+*-* Sets the frame range to "Current Frame".
 
-Toggles the save output on and off.
+#### <img src="img/m_RenderSet_PreviewRange.png" alt="Render Set Preview Range" class="icon"> Render Set Preview Range
 
-#### Render Set Save ON OFF v02
+*-* Sets the frame range to "Preview Range".
 
-Toggles the save output on and off with a command plugin.
+#### <img src="img/m_rsSet_BaseSetting.png" alt="Sampling CTRL" class="icon"> Quick Redshift Render Setting Preset
 
-#### Sampling Lower
+*-* Configures the Redshift renderer to a Basic quick render setting:
 
-Lowers the sampling threshold for Redshift renderer.
+1. Disables automatic sampling.
+2. Sets cutoff thresholds to 0.01.
+3. Sets the adaptive error threshold to 0.1.
+4. Sets the maximum samples for unified sampling and other related parameters to 32.
+5. Configures the secondary Global Illumination (GI) engine to Brute Force and sets the number of rays.
+6. Sets the block size to 512.
 
-#### Sampling CTRL
+*Make sure to set Render Mode to **Advanced***
 
-Controls the sampling threshold for Redshift renderer with keyboard modifiers.
+#### <img src="img/m_rsSet_SamplingCTRL.png" alt="Sampling CTRL" class="icon"> Sampling CTRL
 
-#### Bucket 64
+*-* Multiplies by x2 the "Unified Max Samples" Sampling overrides and Brute Force Rays. <br> *If "Sampling Overrides" are higher than Unified Max Samples it will multiply this value by x2, otherwise it will take Max Samples value* <br> *-* If ALT is pressed, the sampling values are halved; instead of doubled. 
 
-Sets the Redshift bucket size to 64.
+#### <img src="img/m_rsSet_Bucket64.png" alt="Bucket 64" class="icon"> Bucket 64
 
-#### Cutoff Thresholds Q
+*-* Sets the Redshift bucket size to 64.
 
-Sets the cutoff thresholds for Redshift renderer.
+#### <img src="img/m_rsSet_Bucket512.png" alt="Bucket 512" class="icon"> Bucket 512
 
-#### Bucket 512
+*-* Sets the Redshift bucket size to 512.
 
-Sets the Redshift bucket size to 512.
+#### <img src="img/m_rsSet_CutoffThresholds_Q.png" alt="Cutoff Thresholds Q" class="icon"> Cutoff Thresholds Q
 
-#### Sampling Thresh 0x01
+*-* Sets the cutoff thresholds for Redshift renderer to 0.01 to speedup rendering. <br>
+*Use with Caution may introduce fireflyes in certain scenarios*
 
-Sets the Redshift sampling threshold to 0.01.
+#### <img src="img/m_rsSet_SamplingThresh_0x005.png" alt="Sampling Thresh 0x005" class="icon"> Sampling Threshold 0.005
 
-#### Sampling Thresh 0x005
+*-* Sets the Redshift sampling threshold to 0.005.
 
-Sets the Redshift sampling threshold to 0.005.
+#### <img src="img/m_rsSet_SamplingThresh_0x01_1.png" alt="Sampling Threshold 0x1" class="icon"> Sampling Threshold 0.01
 
-#### Sampling Thresh 0x1
+*-* Sets the Redshift sampling threshold to 0.01.
 
-Sets the Redshift sampling threshold to 0.1.
+#### <img src="img/m_rsSet_SamplingThresh_0x01.png" alt="Sampling Thresh 0x01" class="icon"> Sampling Threshold 0.1
 
-#### Sampling Thresh 1
+*-* Sets the Redshift sampling threshold to 0.1.
 
-Sets the Redshift sampling threshold to 1.
+#### <img src="img/m_rsSet_SamplingThresh_1.png" alt="Sampling Threshold 1" class="icon"> Sampling Threshold 1
 
-### Utility
+*-* Sets the Redshift sampling threshold to 1.
 
-#### Convert Hair to Spline
+## Utility
 
-Converts a selected Hair object to a spline.
+#### <img src="img/m_CameraGridToggle.png" alt="Camera Grid Toggle" class="icon"> Camera Grid Toggle
 
-#### Bounding Box Selected Objects
+*-* Toggles the camera grid on and off. *Recommended to use with shortcut*
 
-Creates a bounding box around selected objects.
+#### <img src="img/m_BoundingBox_SelectedObjects.png" alt="Bounding Box Selected Objects" class="icon"> Bounding Box Selected Objects
 
-#### Camera Grid Toggle
+*-* Creates a bounding box around selected objects.
 
-Toggles the camera grid on and off.
+#### <img src="img/m_FFD_SelectedObjs.png" alt="FFD Selected Objects" class="icon"> FFD Selected Objects
 
-#### FFD Selected Objects
+*-* Adds an FFD object to selected objects.
 
-Adds an FFD object to selected objects.
+#### <img src="img/m_FFDtoNulls.png" alt="FFD to Nulls" class="icon"> FFD to Nulls
 
-#### FFD to Nulls
+*-* Converts FFD points to nulls.
 
-Converts FFD points to nulls.
+#### <img src="img/m_FFD_SelectedVerts.png" alt="FFD Selected Verts" class="icon"> FFD Selected Verts
 
-#### Paste as Child
+*-* Adds an FFD object to selected vertices.
 
-Pastes objects as children of the current selection.
+#### <img src="img/m_FFDtoNulls.png" alt="FFD to Nulls" class="icon"> FFD to Nulls
 
-#### Hierarchy Move Down
+*-* Converts FFD vertices into Null objects.
 
-Moves selected objects down in the hierarchy.
+#### <img src="img/m_FFD_SelectedObjs.png" alt="FFD Selected Objs" class="icon"> FFD Selected Objs
 
-#### Hierarchy Move Up
+*-* Adds FFD object to selected objects.
 
-Moves selected objects up in the hierarchy.
+#### <img src="img/m_VisibilityToggle.png" alt="Visibility Toggle" class="icon"> Visibility Toggle
 
-#### Viewport Clean
+*-* Toggles the visibility of selected objects. *Recommended to use with shortcut Shift+V*
 
-Cleans up the viewport by toggling various display options.
+#### <img src="img/m_ViewportClean.png" alt="Viewport Clean" class="icon"> Viewport Clean
 
-#### Swap Index Number
+*-* Cleans up the viewport by toggling various display options. *Recommended to use with shortcut*
 
-Swaps the index number of points.
+#### <img src="img/m_Reset Visibility.png" alt="Reset Visibility" class="icon"> Reset Visibility
 
-#### Points to Circle
+*-* Resets the visibility of selected objects.
 
-Converts selected points to a circle.
+#### <img src="img/m_ResetRotation.png" alt="Reset Rotation" class="icon"> Reset Rotation
 
-#### Point Auto Rig
+*-* Resets the rotation of selected objects.
 
-Automatically rigs points with nulls.
+#### <img src="img/m_RemoveEmptyNulls.png" alt="Remove Empty Nulls" class="icon"> Remove Empty Nulls
 
-#### Remove Empty Nulls
+*-* Removes empty null objects from the scene.
 
-Removes empty null objects from the scene.
-
-#### Random Color Group
-
-Sets a random display color to the current object or tag selection.
-
-#### Batch Export Objects
+#### <img src="img/m_BatchExportObjects.png" alt="Batch Export Objects" class="icon"> Batch Export Objects
 
 Batch exports selected objects to file root as selected format.
 
-#### FFD Selected Verts
+#### <img src="img/m_ViewportClean.png" alt="Viewport Clean" class="icon"> Viewport Clean
 
-Adds an FFD object to selected vertices.
+*-* Cleans up the viewport by toggling various display options.
 
-#### Car Generator
-
-Generates a random car model.
-
-#### FFD to Nulls
-
-Converts FFD vertices into Null objects.
-
-#### FFD Selected Objs
-
-Adds FFD object to selected objects.
-
-#### Hierarchy Move DN
-
-Moves selected objects down in the hierarchy.
-
-#### Hierarchy Move UP
-
-Moves selected objects up in the hierarchy.
-
-#### Paste as Child
-
-Pastes objects as children of the current selection.
-
-#### Viewport Clean
-
-Cleans up the viewport by toggling various display options.
-
-## License
+# License
 
 This project is licensed under the Creative Commons Legal Code CC0 1.0 Universal. See the [LICENSE](LICENSE) file for details.

@@ -101,11 +101,11 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 *-* Selects the children of the selected objects.
 
-#### <img src="img/m_HierarchyMoveDn.png" alt="Hierarchy Move Down" class="icon"> Hierarchy Move Down
+#### <img src="img/m_HierarchyMoveDN.png" alt="Hierarchy Move Down" class="icon"> Hierarchy Move Down
 
 *-* Moves selected objects down in the hierarchy.
 
-#### <img src="img/m_HierarchyMoveUp.png" alt="Hierarchy Move Up" class="icon"> Hierarchy Move Up
+#### <img src="img/m_HierarchyMoveUP.png" alt="Hierarchy Move Up" class="icon"> Hierarchy Move Up
 
 *-* Moves selected objects up in the hierarchy.
 

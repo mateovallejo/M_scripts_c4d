@@ -1,12 +1,3 @@
-<style>
-.icon {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
-  padding-right: 10px;
-}
-</style>
-
 # m_Scripts_1.0 C4D
 
 A collection of Python scripts for Cinema 4D. These scripts provide various functionalities to enhance and speedup your workflow. Some are mostly shorcuts to simple tasks.

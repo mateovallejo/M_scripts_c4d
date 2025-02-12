@@ -33,9 +33,9 @@ def main():
             c4d.CallCommand(465001148)  # Off Before
             c4d.CallCommand(465001154)  # Off After
         else:
-            # En caso contrario, ejecuta Repeat After y Repeat Before
-            c4d.CallCommand(465001157)  # Repeat After
-            c4d.CallCommand(465001151)  # Repeat Before
+            # En caso contrario, ejecuta Constant After y Constant Before
+            c4d.CallCommand(465001156)  # Constant After
+            c4d.CallCommand(465001150)  # Constant Before
     finally:
         # Finaliza la transacción de deshacer
         doc.EndUndo()

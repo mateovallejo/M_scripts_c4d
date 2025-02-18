@@ -1,7 +1,7 @@
 """
 Author: Mateo Vallejo
 Website:
-Version: 1.0.0
+Version: 1.0.1
 Name-US:m_AlignToSelected
 Description-US:Align first selected object to second selected object.
 """
@@ -9,36 +9,27 @@ Description-US:Align first selected object to second selected object.
 import c4d
 
 def main():
-    # Obtén los objetos seleccionados
+    # Get the selected objects
     selected = doc.GetActiveObjects(c4d.GETACTIVEOBJECTFLAGS_SELECTIONORDER)
 
-    # Verifica que haya al menos dos objetos seleccionados
+    # Check that there are at least two selected objects
     if len(selected) < 2:
-        print("Por favor selecciona al menos dos objetos")
+        print("Please select at least two objects")
         return
 
-    # Obtén el primer y segundo objeto seleccionado
+    # Get the first and second selected objects
     first_obj = selected[0]
     second_obj = selected[1]
 
-    # Comienza la operación de deshacer
     doc.StartUndo()
-
-    # Registra el estado del objeto antes de hacer los cambios
     doc.AddUndo(c4d.UNDOTYPE_CHANGE, first_obj)
 
-    # Copia las coordenadas del primer objeto al segundo
+    # Copy the coordinates from the second object to the first object
     first_obj.SetMg(second_obj.GetMg())
 
-    # Registra el estado del objeto después de hacer los cambios
     doc.AddUndo(c4d.UNDOTYPE_CHANGE, first_obj)
-
-    # Termina la operación de deshacer
     doc.EndUndo()
-
-    # Refresca el documento para ver los cambios
     c4d.EventAdd()
 
-# Ejecuta la función principal
 if __name__=='__main__':
     main()

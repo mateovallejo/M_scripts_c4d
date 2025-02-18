@@ -1,12 +1,21 @@
-# m_Scripts_1.0 C4D
+# m_Scripts_1.1.0 C4D
 
 A collection of Python scripts for Cinema 4D. These scripts provide various functionalities to enhance and speedup your workflow. Some are mostly shorcuts to simple tasks.
+
+## Changelog
+**Latest Version 1.1.0** - *(19.02.2025)*
+ - 19.02.25 **New Script** m_MakeChildren.py
+ - 19.02.25 **New Script** m_PasteMatchSelection.py
+ - 19.02.25 **New Script** m_AxisToBottom.py
+
+ 
+
+
 
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [Scripts](#scripts)
+- [Scripts](#scripts-overview)
   - [Animation](#animation)
   - [Modeling](#modeling)
   - [Object Manager](#object-manager)
@@ -18,10 +27,10 @@ A collection of Python scripts for Cinema 4D. These scripts provide various func
 Download or clone this repository to your local machine.
 
 #### Windows
-`C:\Users\<USER>\AppData\Roaming\MAXON\Maxon Cinema 4D 2025\library\scripts`
+`C:\Users\<USER>\AppData\Roaming\MAXON\Maxon Cinema 4D 2025\library\scripts\m_scripts`
 
 #### Mac OS
-`/Applications/MAXON/CINEMA 4D 2025/library/scripts`
+`/Applications/MAXON/CINEMA 4D 2025/library/scripts/m_scripts`
 
 ### Using scripts
 After you have installed m_Scripts you have to reboot Cinema 4D if it is already running. Scripts are located under Extensions -> User Scripts -> M_Scripts_#.##. Scripts can be used with the commander (Shift+C) too.
@@ -76,6 +85,10 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 *-* Copies the display color from the first selected object to the second selected object.
 
+#### <img src="img/m_PasteMatchSelection.png" alt="Paste Match Selection" class="icon" width="42" height="42"> Paste Match Selection
+
+*-* Pastes an object matching the coordinates of the currantly selected object.
+
 #### <img src="img/m_CopyColortoChild.png" alt="Copy Color to Child" class="icon" width="42" height="42"> Copy Color to Child
 
 *-* Copies the display color from the parent to the children of selected objects.
@@ -108,6 +121,11 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 *-* Moves selected objects up in the hierarchy.
 
+#### <img src="img/m_MakeChildren.png" alt="Make Children" class="icon" width="42" height="42"> Make Children
+
+*-* Makes selected objects children of the last selected object.
+
+
 #### <img src="img/m_SceneArrange.png" alt="Scene Arrange" class="icon" width="42" height="42"> Scene Arrange
 
 *-* Groups objects in the scene into categories under new null objects. *Still needs some improvement*
@@ -115,6 +133,10 @@ Some of the scripts have multiple functions and you can use those with key modif
 #### <img src="img/m_SceneArrangeCloners.png" alt="Scene Arrange Cloners" class="icon" width="42" height="42"> Scene Arrange Cloners
 
 *-* Groups each selected cloner and its effectors under a new null object.
+
+#### <img src="img/m_AxisToBottom.png" alt="Axis To Bottom" class="icon" width="42" height="42"> Axis To Bottom
+
+*-* Moves the axis of the selected objects to the bottom.
 
 ## Render Setup
 

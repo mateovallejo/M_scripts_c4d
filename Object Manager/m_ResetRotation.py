@@ -8,16 +8,23 @@ import c4d
 from c4d import gui
 
 def main():
-    # Obtener los objetos seleccionados
+    # Start an undo action
+    doc.StartUndo()
+
+    # Get the selected objects
     selected_objects = doc.GetActiveObjects(c4d.GETACTIVEOBJECTFLAGS_CHILDREN)
-    
-    # Iterar sobre los objetos seleccionados y establecer la rotación a 0
+    # Iterate over the selected objects and set the rotation to 0
     for obj in selected_objects:
+        # Add undo for the rotation change
+        doc.AddUndo(c4d.UNDOTYPE_CHANGE, obj)
         obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_X] = 0
         obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_Y] = 0
         obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_Z] = 0
 
-    # Actualizar la escena
+    # End the undo action
+    doc.EndUndo()
+
+    # Update the scene
     c4d.EventAdd()
 
 if __name__ == '__main__':

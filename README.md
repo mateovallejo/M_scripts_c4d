@@ -75,6 +75,10 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 *-* Aligns selected vertices to the origin on the Z axis.
 
+#### <img src="img/m_FlattenPolygons.png" alt="Flatten Polygons" class="icon" width="42" height="42"> Flatten Polygons
+
+*-* Flattens selected polygons along the specified axis.
+
 ## Object Manager
 
 #### <img src="img/m_AlignToSelected.png" alt="Align To Selected" class="icon" width="42" height="42"> Align To Selected
@@ -137,6 +141,19 @@ Some of the scripts have multiple functions and you can use those with key modif
 #### <img src="img/m_AxisToBottom.png" alt="Axis To Bottom" class="icon" width="42" height="42"> Axis To Bottom
 
 *-* Moves the axis of the selected objects to the bottom.
+
+#### <img src="img/m_DistributeObjects_X.png" alt="Distribute Objects X" class="icon" width="42" height="42"> Distribute Objects X
+
+*-* Distributes selected objects along the X axis.
+
+#### <img src="img/m_DistributeObjects_Y.png" alt="Distribute Objects Y" class="icon" width="42" height="42"> Distribute Objects Y
+
+*-* Distributes selected objects along the Y axis.
+
+#### <img src="img/m_DistributeObjects_Z.png" alt="Distribute Objects Z" class="icon" width="42" height="42"> Distribute Objects Z
+
+*-* Distributes selected objects along the Z axis.
+
 
 ## Render Setup
 
@@ -252,6 +269,10 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 *-* Resets the rotation of selected objects.
 
+#### <img src="img/m_ResetPosition.png" alt="Reset Position" class="icon" width="42" height="42"> Reset Position
+
+*-* Resets the position of selected objects to the origin.
+
 #### <img src="img/m_RemoveEmptyNulls.png" alt="Remove Empty Nulls" class="icon" width="42" height="42"> Remove Empty Nulls
 
 *-* Removes empty null objects from the scene.
@@ -263,6 +284,10 @@ Batch exports selected objects to file root as selected format.
 #### <img src="img/m_ViewportClean.png" alt="Viewport Clean" class="icon" width="42" height="42"> Viewport Clean
 
 *-* Cleans up the viewport by toggling various display options.
+
+#### <img src="img/m_SetAsFocus.png" alt="Set As Focus" class="icon" width="42" height="42"> Set As Focus
+
+*-* Sets the selected object as the focus point.
 
 # License
 

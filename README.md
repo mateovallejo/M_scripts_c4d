@@ -3,10 +3,30 @@
 A collection of Python scripts for Cinema 4D. These scripts provide various functionalities to enhance and speedup your workflow. Some are mostly shorcuts to simple tasks.
 
 ## Changelog
-**Latest Version 1.1.0** - *(19.02.2025)*
- - 19.02.25 **New Script** m_MakeChildren.py
- - 19.02.25 **New Script** m_PasteMatchSelection.py
- - 19.02.25 **New Script** m_AxisToBottom.py
+
+
+### **Latest Version 1.2.0** - *(19.25.2025)*
+
+#### *Updated*
+ - m_AlignToSelected - Updated to work on multiple objects
+ - m_HierarchyMoveDN - Added AlT functionality to send to Bottom on Object Manager
+ - m_HierarchyMoveUP - Added AlT functionality to send to Top on Object Manager
+ - m_MakeChildren - Updated to work on multiple objects
+ - m_SceneArrange - Added Pop-up Menu to select what to arrange
+ - m_copyDisplayColor - Updated to work on multiple objects
+
+#### *Added*
+ - m_AnimationCopyToSelected.py
+ - m_ResetPosition
+ - m_FlattenPolygons
+ - m_DistributeObjects_XYZ
+ - m_SetAsFocus
+
+### **Version 1.1.0** - *(19.02.2025)*
+#### *Added* 
+  - m_MakeChildren.py
+  - m_PasteMatchSelection.py
+  - m_AxisToBottom.py
 
  
 

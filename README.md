@@ -46,6 +46,8 @@ A collection of Python scripts for Cinema 4D. These scripts provide various func
 
 Download or clone this repository to your local machine.
 
+<img src="img/installationpath.png" alt="AnimCurve Constant" class="icon" width="1280">
+
 #### Windows
 `C:\Users\<USER>\AppData\Roaming\MAXON\Maxon Cinema 4D 2025\library\scripts\m_scripts`
 

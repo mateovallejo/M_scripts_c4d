@@ -23,8 +23,9 @@ def show_menu():
         12: "&i18170&",        # Icon for Cameras
         13: "&i440000235&",     # Icon for Generators
         14: "&i" + str(c4d.Ospline) + "&",   # Icon for Splines
-        15: "&i1052838&",        # Icon for All
-        16: "&i1058521&"         # Icon for Empty Nulls
+        15: "&i1052838&",       # Icon for All
+        16: "&i1058521&",       # Icon for Empty Nulls
+        17: "&i1058522&"        # Icon for Simulation
     }
     
     entries.SetString(15, icons[15] + " All")
@@ -34,6 +35,7 @@ def show_menu():
     entries.SetString(13, icons[13] + " Generators")
     entries.SetString(14, icons[14] + " Splines")
     entries.SetString(16, icons[16] + " Empty Nulls")
+    entries.SetString(17, icons[17] + " Simulation")
     
     result = gui.ShowPopupDialog(cd=None, bc=entries, x=c4d.MOUSEPOS, y=c4d.MOUSEPOS, flags=c4d.POPUP_RIGHT)
     category = None
@@ -51,6 +53,8 @@ def show_menu():
         category = "Splines"
     elif result == 16:
         category = "Empty Nulls"
+    elif result == 17:
+        category = "Simulation"
     return category
 
 # ------------------------------
@@ -116,13 +120,14 @@ def group_scene(selected_category):
 
     groups = {}
     groups_info = {
-        "All":        None,                      # No color for "All"
-        "Lights":     rgb_to_vector(255, 255, 0),      # Yellow
-        "Geometry":   rgb_to_vector(70, 250, 200),     # Turquoise
-        "Cameras":    rgb_to_vector(255, 60, 80),       # Red
-        "Generators": rgb_to_vector(108, 229, 130),     # Light Green
-        "Splines":    rgb_to_vector(140, 220, 250),      # Light Blue
-        "Empty Nulls": rgb_to_vector(200, 200, 200)      # Grey
+        "All":         None,                           # No color for "All"
+        "Lights":      rgb_to_vector(255, 255, 0),      # Yellow
+        "Geometry":    rgb_to_vector(70, 250, 200),     # Turquoise
+        "Cameras":     rgb_to_vector(255, 60, 80),       # Red
+        "Generators":  rgb_to_vector(108, 229, 130),     # Light Green
+        "Splines":     rgb_to_vector(140, 220, 250),     # Light Blue
+        "Empty Nulls": rgb_to_vector(200, 200, 200),     # Grey
+        "Simulation":  rgb_to_vector(170, 190, 255)      # Light Blue
     }
     groupNulls = []
 
@@ -140,7 +145,7 @@ def group_scene(selected_category):
         c4d.Osplinecycloid,
         c4d.Ospline4side,
         c4d.Osplineflower,
-        c4d.Osplinecogwheel
+        c4d.Osplinecogwheel,
     ]
     
     primitive_types = [
@@ -161,6 +166,7 @@ def group_scene(selected_category):
         c4d.Osinglepoly,
         c4d.Obezier,
         c4d.Ooiltank,
+        c4d.Oinstance,
     ]
 
     # Definition of known light types.
@@ -170,10 +176,75 @@ def group_scene(selected_category):
         c4d.Orsenvironment,
         c4d.Orssky
     ]
+    
+    # Definition list for generator types.
+    generator_types = [
+        c4d.Ovolumebuilder,
+        c4d.Oboole,
+        c4d.Obooleangenerator,
+        c4d.Ocloth,
+        c4d.Osweep,
+        c4d.Oextrude,
+        c4d.Oloft,
+        c4d.Oconnector,
+        c4d.Olathe,
+        c4d.Osolidifygenerator,
+        c4d.Osymmetry,
+        c4d.Osymmetrygenerator,
+        c4d.Osds,
+        c4d.Oarray,
+        c4d.Orelief,
+        c4d.Oatomarray,
+        c4d.Olod,
+        c4d.Ovectorimport,
+        c4d.Opolyreduction,
+        c4d.Opython,
+        c4d.Oremesh,
+        c4d.Osplinecontour,
+        c4d.Opolyreduction,
+        c4d.Ometaball,
+        c4d.Omgsplinemask,
+        c4d.Omgvoronoifracture,
+        c4d.Omgmatrix,
+        c4d.Omgfracture,
+        c4d.Ovoronoipointgenerator,
+        c4d.Omgtracer,
+        c4d.Omginstance,
+    ]
+    
+    # Definition list for simulation types.
+    simulation_types = [
+        c4d.Oattractor,
+        c4d.Odeflector,
+        c4d.Odestructor,
+        c4d.Ofriction,
+        c4d.Ogravitation,
+        c4d.Oparticle,
+        c4d.Oparticlemodifier,
+        c4d.Orotation,
+        c4d.Oturbulence,
+        c4d.Owind,
+        c4d.Osimulationscene,
+        c4d.Ofpgroup,
+        c4d.Ofpbasicemitter,
+        c4d.Oforce,
+        c4d.Omotor,
+        c4d.Ospring,
+        c4d.Oconnectorconstraint,
+        c4d.Ofieldforce,
+        c4d.Ofpmeshemitter,
+        c4d.Ofpsplineemitter,
+    ]
 
-    # Gather all objects in the scene
-    topLevel = doc.GetFirstObject()
-    allObjects = gather_objects(topLevel)
+    # ------------------------------
+    # Gather objects: If there are selected objects, use only those; otherwise, use the entire scene.
+    active_objects = doc.GetActiveObjects(0)
+    if active_objects:
+        allObjects = active_objects
+    else:
+        topLevel = doc.GetFirstObject()
+        allObjects = gather_objects(topLevel)
+
     moved = set()
 
     for obj in allObjects:
@@ -183,9 +254,7 @@ def group_scene(selected_category):
 
         group_key = None
         # Determine the category for the object
-        if branch_contains_cloner(obj) or obj.CheckType(c4d.Ovolumebuilder):
-            group_key = "Generators"
-        elif obj.CheckType(c4d.Ocamera) or obj.CheckType(c4d.Orscamera):
+        if obj.CheckType(c4d.Ocamera) or obj.CheckType(c4d.Orscamera):
             group_key = "Cameras"
         elif any(obj.CheckType(light_type) for light_type in light_types):
             group_key = "Lights"
@@ -197,6 +266,10 @@ def group_scene(selected_category):
             group_key = "Geometry"
         elif obj.CheckType(c4d.Onull) and not obj.GetDown():
             group_key = "Empty Nulls"
+        elif branch_contains_cloner(obj) or any(obj.CheckType(gen) for gen in generator_types):
+            group_key = "Generators"
+        elif any(obj.CheckType(sim) for sim in simulation_types):
+            group_key = "Simulation"
         
         # If a specific category was chosen, skip objects that don't match it.
         if selected_category != "All" and group_key != selected_category:

@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Selects the first child of each selected object.
+"""
+
 import c4d
 from c4d import gui
 

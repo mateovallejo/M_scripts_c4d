@@ -1,305 +1,316 @@
-# Cinema 4D Python Scripts
+# m_Scripts_1.1.0 C4D
 
-This repository contains a collection of Python scripts for use with Cinema 4D. These scripts provide various functionalities to enhance your workflow in Cinema 4D.
+A collection of Python scripts for Cinema 4D. These scripts provide various functionalities to enhance and speedup your workflow. Some are mostly shorcuts to simple tasks.
+
+## Changelog
+
+
+### **Latest Version 1.2.0** - *(19.25.2025)*
+
+#### *Updated*
+ - m_AlignToSelected - Updated to work on multiple objects
+ - m_HierarchyMoveDN - Added AlT functionality to send to Bottom on Object Manager
+ - m_HierarchyMoveUP - Added AlT functionality to send to Top on Object Manager
+ - m_MakeChildren - Updated to work on multiple objects
+ - m_SceneArrange - Added Pop-up Menu to select what to arrange
+ - m_copyDisplayColor - Updated to work on multiple objects
+
+#### *Added*
+ - m_AnimationCopyToSelected.py
+ - m_ResetPosition
+ - m_FlattenPolygons
+ - m_DistributeObjects_XYZ
+ - m_SetAsFocus
+
+### **Version 1.1.0** - *(19.02.2025)*
+#### *Added* 
+  - m_MakeChildren.py
+  - m_PasteMatchSelection.py
+  - m_AxisToBottom.py
+
+ 
+
+
 
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [Scripts](#scripts)
-  - [Camera Filter](#camera-filterpy)
-  - [Convert Hair to Spline](#convert-hair-to-splinepy)
-  - [Copy-Paste Material Tags](#copy-paste-materialtags_v002py)
-  - [Curve Repeat After Before](#curve_repeatafterbeforepy)
-  - [Align Selected X](#m_align-selected-xpy)
-  - [Align Selected Y](#m_align-selected-ypy)
-  - [Align Selected Z](#m_align-selected-zpy)
-  - [Align To Selected](#m_aligntoselectedpy)
-  - [Align Zero Selected X](#m_alignzero-selected-xpy)
-  - [Align Zero Selected Y](#m_alignzero-selected-ypy)
-  - [Align Zero Selected Z](#m_alignzero-selected-zpy)
-  - [AnimCurve Repeat After](#m_animcurve_repeatafterpy)
-  - [Bounding Box Selected Objects](#m_boundingbox_selectedobjectspy)
-  - [Camera Grid Toggle](#m_cameragridtoggle_01py)
-  - [Copy Material Tags Hierarchy](#m_copymaterialtags_hierarchypy)
-  - [Copy Color to Child](#m_copycolortochildpy)
-  - [Copy Display Color](#m_copydisplaycolorpy)
-  - [FFD Selected Objects](#m_ffd_selectedobjspy)
-  - [FFD to Nulls](#m_ffd-to-nulls_01py)
-  - [Paste as Child](#m_paste-as-childpy)
-  - [Hierarchy Move Down](#m_hierarchymovednpy)
-  - [Render Set 1-1](#m_renderset-1-1py)
-  - [Hierarchy Move Up](#m_hierarchymoveuppy)
-  - [Paste Next to](#m_pastenextopy)
-  - [Render Set Res Div 2](#m_renderset_resdiv2py)
-  - [Render Set Res Mult 2](#m_renderset_resmult2py)
-  - [Render Set 9-16](#m_renderset-9-16py)
-  - [Render Set 16-9](#m_renderset-16-9py)
-  - [Render Set Current Frame](#m_renderset_currentframepy)
-  - [Render Set Preview Range](#m_renderset_previewrangepy)
-  - [Render Set Save ON OFF](#m_renderset_save-on-offpy)
-  - [Render Set Save ON OFF v02](#m_renderset_save-on-off_v02py)
-  - [Reset Visibility](#m_reset-visibilitypy)
-  - [Reset Rotation](#m_resetrotationpy)
-  - [Sampling Lower](#m_rset_samplinglowerpy)
-  - [Sampling CTRL](#m_rset_samplingctrlpy)
-  - [Bucket 64](#m_rsset_bucket64py)
-  - [Cutoff Thresholds Q](#m_rsset_cutoffthresholds_qpy)
-  - [Bucket 512](#m_rsset_bucket512py)
-  - [Sampling Thresh 0x01](#m_rsset_samplingthresh_0x01py)
-  - [Sampling Thresh 0x005](#m_rsset_samplingthresh_0x005py)
-  - [Sampling Thresh 0x1](#m_rsset_samplingthresh_0x1py)
-  - [Sampling Thresh 1](#m_rsset_samplingthresh_1py)
-  - [Viewport Clean](#m_viewportclean_01py)
-  - [Select Children](#m_select-childrenpy)
-  - [Swap Index Number](#m_swapindexnumberpy)
-  - [Points to Circle](#points2circlepy)
-  - [Point Auto Rig](#point_autorigpy)
-  - [Remove Empty Nulls](#remove-empty-nullspy)
-  - [Render All Frames](#renderallframespy)
-  - [Visibility Off](#visibility-offpy)
-  - [Render Current Frame](#rendercurrentframepy)
-  - [Visibility Toggle](#visibility-tog_01py)
-  - [Visibility 2](#vis2py)
-  - [Random Color Group](#m_randomcolor_grouppy)
+- [Scripts](#scripts-overview)
+  - [Animation](#animation)
+  - [Modeling](#modeling)
+  - [Object Manager](#object-manager)
+  - [Render](#render)
+  - [Utility](#utility)
 
-## Installation
+# Installation
 
-1. Download or clone this repository to your local machine.
-2. Open Cinema 4D.
-3. Go to `Script` > `Script Manager`.
-4. Click on `File` > `Load Script` and select the desired script from the downloaded repository.
+Download or clone this repository to your local machine.
 
-## Usage
+<img src="img/installationpath.png" alt="AnimCurve Constant" class="icon" width="1280">
 
-Each script provides a specific functionality. To use a script, follow these steps:
+#### Windows
+`C:\Users\<USER>\AppData\Roaming\MAXON\Maxon Cinema 4D 2025\library\scripts\m_scripts`
 
-1. Load the script into Cinema 4D using the Script Manager.
-2. Select the objects or elements in your scene that you want to apply the script to.
-3. Execute the script by clicking the `Execute` button in the Script Manager.
+#### Mac OS
+`/Applications/MAXON/CINEMA 4D 2025/library/scripts/m_scripts`
 
-## Scripts
+### Using scripts
+After you have installed m_Scripts you have to reboot Cinema 4D if it is already running. Scripts are located under Extensions -> User Scripts -> M_Scripts_#.##. Scripts can be used with the commander (Shift+C) too.
 
-### Camera Filter.py
+Some of the scripts have multiple functions and you can use those with key modifiers (Alt / Ctrl / Shift) and different combinations. Some of the scripts requires a certain item selection or mode to be active. If you don't know what the script does you can either open the script in the script editor and read the description or search the info of the specific script on this page.
 
-Toggles the display filter for the camera.
+# Scripts Overview
 
-### Convert Hair to Spline.py
+## Animation
 
-Converts a selected Hair object to a spline.
+#### <img src="img/m_AnimCurve_Constant.png" alt="AnimCurve Constant" class="icon" width="42" height="42"> AnimCurve Constant
 
-### copy-paste-materialTags_v002.py
+*-* Makes the animation curve constant before and after.
 
-Copies material tags from one hierarchy to another with the same objects.
+#### <img src="img/m_AnimCurve_RepeatAfter.png" alt="AnimCurve Repeat After" class="icon" width="42" height="42"> AnimCurve Repeat After
 
-### Curve_RepeatAfterBefore.py
+*-* Repeats the animation curve before and after.
 
-Applies the "Repeat After" and "Repeat Before" options to the selected timeline.
+## Modeling
 
-### m_Align Selected X.py
+#### <img src="img/m_AlignSelected_X.png" alt="Align Selected X" class="icon" width="42" height="42"> Align Selected X
 
-Aligns selected vertices on the X axis.
+*-* Aligns selected vertices on the X axis.
 
-### m_Align Selected Y.py
+#### <img src="img/m_AlignSelected_Y.png" alt="Align Selected Y" class="icon" width="42" height="42"> Align Selected Y
 
-Aligns selected vertices on the Y axis.
+*-* Aligns selected vertices on the Y axis.
 
-### m_Align Selected Z.py
+#### <img src="img/m_AlignSelected_Z.png" alt="Align Selected Z" class="icon" width="42" height="42"> Align Selected Z
 
-Aligns selected vertices on the Z axis.
+*-* Aligns selected vertices on the Z axis.
 
-### m_AlignToSelected.py
+#### <img src="img/m_AlignZeroSelected_X.png" alt="Align Zero Selected X" class="icon" width="42" height="42"> Align Zero Selected X
 
-Aligns the first selected object to the second selected object.
+*-* Aligns selected vertices to the origin on the X axis.
 
-### m_AlignZero Selected X.py
+#### <img src="img/m_AlignZeroSelected_Y.png" alt="Align Zero Selected Y" class="icon" width="42" height="42"> Align Zero Selected Y
 
-Aligns selected vertices to the origin on the X axis.
+*-* Aligns selected vertices to the origin on the Y axis.
 
-### m_AlignZero Selected Y.py
+#### <img src="img/m_AlignZeroSelected_Z.png" alt="Align Zero Selected Z" class="icon" width="42" height="42"> Align Zero Selected Z
 
-Aligns selected vertices to the origin on the Y axis.
+*-* Aligns selected vertices to the origin on the Z axis.
 
-### m_AlignZero Selected Z.py
+#### <img src="img/m_FlattenPolygons.png" alt="Flatten Polygons" class="icon" width="42" height="42"> Flatten Polygons
 
-Aligns selected vertices to the origin on the Z axis.
+*-* Flattens selected polygons along the specified axis.
 
-### m_AnimCurve_RepeatAfter.py
+## Object Manager
 
-Repeats the animation curve after and before.
+#### <img src="img/m_AlignToSelected.png" alt="Align To Selected" class="icon" width="42" height="42"> Align To Selected
 
-### m_BoundingBox_SelectedObjects.py
+*-* Aligns the first selected object to the second selected object.
 
-Creates a bounding box around selected objects.
+#### <img src="img/m_CopyDisplayColor.png" alt="Copy Display Color" class="icon" width="42" height="42"> Copy Display Color
 
-### m_CameraGridToggle_01.py
+*-* Copies the display color from the first selected object to the second selected object.
 
-Toggles the camera grid on and off.
+#### <img src="img/m_PasteMatchSelection.png" alt="Paste Match Selection" class="icon" width="42" height="42"> Paste Match Selection
 
-### m_CopyMaterialTags_Hierarchy.py
+*-* Pastes an object matching the coordinates of the currantly selected object.
 
-Copies material tags from one hierarchy to another with the same objects.
+#### <img src="img/m_CopyColortoChild.png" alt="Copy Color to Child" class="icon" width="42" height="42"> Copy Color to Child
 
-### m_CopyColortoChild.py
+*-* Copies the display color from the parent to the children of selected objects.
 
-Copies the display color from the parent to the children of selected objects.
+#### <img src="img/m_RandomColor_Group.png" alt="Random Color Group" class="icon" width="42" height="42"> Random Color Group
 
-### m_copyDisplayColor.py
+*-* Sets a random display color to the current object or tag selection.
 
-Copies the display color from the first selected object to the second selected object.
+#### <img src="img/m_CopyMaterialTags_Hierarchy.png" alt="Copy Material Tags Hierarchy" class="icon" width="42" height="42"> Copy Material Tags Hierarchy
 
-### m_FFD_SelectedObjs.py
+*-* Copies material tags from one hierarchy to another with the same objects.
 
-Adds an FFD object to selected objects.
+#### <img src="img/m_PasteNexto.png" alt="Paste Next to" class="icon" width="42" height="42"> Paste Next to
 
-### m_FFD to nulls_01.py
+*-* Pastes objects next to the selected object in the object manager. *Recommended to use with shortcut*
 
-Converts FFD points to nulls.
+#### <img src="img/m_Pasteaschild.png" alt="Paste as Child" class="icon" width="42" height="42"> Paste as Child
 
-### m_Paste as child.py
+*-* Pastes objects as children of the current selection. *Recommended to use with shortcut*
 
-Pastes objects as children of the current selection.
+#### <img src="img/m_SelectChildren.png" alt="Select Children" class="icon" width="42" height="42"> Select Children
 
-### m_HierarchyMoveDN.py
+*-* Selects the children of the selected objects.
 
-Moves selected objects down in the hierarchy.
+#### <img src="img/m_HierarchyMoveDN.png" alt="Hierarchy Move Down" class="icon" width="42" height="42"> Hierarchy Move Down
 
-### m_RenderSet 1-1.py
+*-* Moves selected objects down in the hierarchy.
 
-Sets the render resolution to 1920x1920.
+#### <img src="img/m_HierarchyMoveUP.png" alt="Hierarchy Move Up" class="icon" width="42" height="42"> Hierarchy Move Up
 
-### m_HierarchyMoveUP.py
+*-* Moves selected objects up in the hierarchy.
 
-Moves selected objects up in the hierarchy.
+#### <img src="img/m_MakeChildren.png" alt="Make Children" class="icon" width="42" height="42"> Make Children
 
-### m_PasteNexto.py
+*-* Makes selected objects children of the last selected object.
 
-Pastes objects next to the selected object in the object manager.
 
-### m_RenderSet_ResDiv2.py
+#### <img src="img/m_SceneArrange.png" alt="Scene Arrange" class="icon" width="42" height="42"> Scene Arrange
 
-Divides the frame resolution by 2.
+*-* Groups objects in the scene into categories under new null objects. *Still needs some improvement*
 
-### m_RenderSet_ResMult2.py
+#### <img src="img/m_SceneArrangeCloners.png" alt="Scene Arrange Cloners" class="icon" width="42" height="42"> Scene Arrange Cloners
 
-Multiplies the frame resolution by 2.
+*-* Groups each selected cloner and its effectors under a new null object.
 
-### m_RenderSet 9-16.py
+#### <img src="img/m_AxisToBottom.png" alt="Axis To Bottom" class="icon" width="42" height="42"> Axis To Bottom
 
-Sets the render resolution to 1080x1920.
+*-* Moves the axis of the selected objects to the bottom.
 
-### m_RenderSet 16-9.py
+#### <img src="img/m_DistributeObjects_X.png" alt="Distribute Objects X" class="icon" width="42" height="42"> Distribute Objects X
 
-Sets the render resolution to 1920x1080.
+*-* Distributes selected objects along the X axis.
 
-### m_RenderSet_CurrentFrame.py
+#### <img src="img/m_DistributeObjects_Y.png" alt="Distribute Objects Y" class="icon" width="42" height="42"> Distribute Objects Y
 
-Sets the frame range to "Current Frame".
+*-* Distributes selected objects along the Y axis.
 
-### m_RenderSet_PreviewRange.py
+#### <img src="img/m_DistributeObjects_Z.png" alt="Distribute Objects Z" class="icon" width="42" height="42"> Distribute Objects Z
 
-Sets the frame range to "Preview Range".
+*-* Distributes selected objects along the Z axis.
 
-### m_RenderSet_Save ON OFF.py
 
-Toggles the save output on and off.
+## Render Setup
 
-### m_RenderSet_Save ON OFF_v02.py
+#### <img src="img/m_RenderSetup_1-1.png" alt="Render Set 1-1" class="icon" width="42" height="42"> Render Set 1-1
 
-Toggles the save output on and off with a command plugin.
+*-* Sets the render resolution to 1920x1920.
 
-### m_Reset Visibility.py
+#### <img src="img/m_RenderSetup_16-9.png" alt="Render Set 16-9" class="icon" width="42" height="42"> Render Set 16-9
 
-Resets the visibility of selected objects.
+*-* Sets the render resolution to 1920x1080.
 
-### m_ResetRotation.py
+#### <img src="img/m_RenderSetup_9-16.png" alt="Render Set 9-16" class="icon" width="42" height="42"> Render Set 9-16
 
-Resets the rotation of selected objects.
+*-* Sets the render resolution to 1080x1920.
 
-### m_rset_SamplingLower.py
+#### <img src="img/m_RenderSetup_CurrentFrame.png" alt="Render Set Current Frame" class="icon" width="42" height="42"> Render Set Current Frame
 
-Lowers the sampling threshold for Redshift renderer.
+*-* Sets the frame range to "Current Frame".
 
-### m_rset_SamplingCTRL.py
+#### <img src="img/m_RenderSet_PreviewRange.png" alt="Render Set Preview Range" class="icon" width="42" height="42"> Render Set Preview Range
 
-Controls the sampling threshold for Redshift renderer with keyboard modifiers.
+*-* Sets the frame range to "Preview Range".
 
-### m_rsSet_Bucket64.py
+#### <img src="img/m_rsSet_BaseSetting.png" alt="Sampling CTRL" class="icon" width="42" height="42"> Quick Redshift Render Setting Preset
 
-Sets the Redshift bucket size to 64.
+*-* Configures the Redshift renderer to a Basic quick render setting:
 
-### m_rsSet_CutoffThresholds_Q.py
+1. Disables automatic sampling.
+2. Sets cutoff thresholds to 0.01.
+3. Sets the adaptive error threshold to 0.1.
+4. Sets the maximum samples for unified sampling and other related parameters to 32.
+5. Configures the secondary Global Illumination (GI) engine to Brute Force and sets the number of rays.
+6. Sets the block size to 512.
 
-Sets the cutoff thresholds for Redshift renderer.
+*Make sure to set Render Mode to **Advanced***
 
-### m_rsSet_Bucket512.py
+#### <img src="img/m_rsSet_SamplingCTRL.png" alt="Sampling CTRL" class="icon" width="42" height="42"> Sampling CTRL
 
-Sets the Redshift bucket size to 512.
+*-* Multiplies by x2 the "Unified Max Samples" Sampling overrides and Brute Force Rays. <br> *If "Sampling Overrides" are higher than Unified Max Samples it will multiply this value by x2, otherwise it will take Max Samples value* <br> *-* If ALT is pressed, the sampling values are halved; instead of doubled. 
 
-### m_rsSet_SamplingThresh_0x01.py
+#### <img src="img/m_rsSet_Bucket64.png" alt="Bucket 64" class="icon" width="42" height="42"> Bucket 64
 
-Sets the Redshift sampling threshold to 0.01.
+*-* Sets the Redshift bucket size to 64.
 
-### m_rsSet_SamplingThresh_0x005.py
+#### <img src="img/m_rsSet_Bucket512.png" alt="Bucket 512" class="icon" width="42" height="42"> Bucket 512
 
-Sets the Redshift sampling threshold to 0.005.
+*-* Sets the Redshift bucket size to 512.
 
-### m_rsSet_SamplingThresh_0x1.py
+#### <img src="img/m_rsSet_CutoffThresholds_Q.png" alt="Cutoff Thresholds Q" class="icon" width="42" height="42"> Cutoff Thresholds Q
 
-Sets the Redshift sampling threshold to 0.1.
+*-* Sets the cutoff thresholds for Redshift renderer to 0.01 to speedup rendering. <br>
+*Use with Caution may introduce fireflyes in certain scenarios*
 
-### m_rsSet_SamplingThresh_1.py
+#### <img src="img/m_rsSet_SamplingThresh_0x005.png" alt="Sampling Thresh 0x005" class="icon" width="42" height="42"> Sampling Threshold 0.005
 
-Sets the Redshift sampling threshold to 1.
+*-* Sets the Redshift sampling threshold to 0.005.
 
-### m_ViewportClean_01.py
+#### <img src="img/m_rsSet_SamplingThresh_0x01_1.png" alt="Sampling Threshold 0x1" class="icon" width="42" height="42"> Sampling Threshold 0.01
 
-Cleans up the viewport by toggling various display options.
+*-* Sets the Redshift sampling threshold to 0.01.
 
-### m_Select Children.py
+#### <img src="img/m_rsSet_SamplingThresh_0x01.png" alt="Sampling Thresh 0x01" class="icon" width="42" height="42"> Sampling Threshold 0.1
 
-Selects the children of the selected objects.
+*-* Sets the Redshift sampling threshold to 0.1.
 
-### m_SwapIndexNumber.py
+#### <img src="img/m_rsSet_SamplingThresh_1.png" alt="Sampling Threshold 1" class="icon" width="42" height="42"> Sampling Threshold 1
 
-Swaps the index number of points.
+*-* Sets the Redshift sampling threshold to 1.
 
-### Points2Circle.py
+## Utility
 
-Converts selected points to a circle.
+#### <img src="img/m_CameraGridToggle.png" alt="Camera Grid Toggle" class="icon" width="42" height="42"> Camera Grid Toggle
 
-### point_autorig.py
+*-* Toggles the camera grid on and off. *Recommended to use with shortcut*
 
-Automatically rigs points with nulls.
+#### <img src="img/m_BoundingBox_SelectedObjects.png" alt="Bounding Box Selected Objects" class="icon" width="42" height="42"> Bounding Box Selected Objects
 
-### Remove Empty Nulls.py
+*-* Creates a bounding box around selected objects.
 
-Removes empty null objects from the scene.
+#### <img src="img/m_FFD_SelectedObjs.png" alt="FFD Selected Objects" class="icon" width="42" height="42"> FFD Selected Objects
 
-### RenderAllFrames.py
+*-* Adds an FFD object to selected objects.
 
-Sets the render frame sequence to all frames.
+#### <img src="img/m_FFDtoNulls.png" alt="FFD to Nulls" class="icon" width="42" height="42"> FFD to Nulls
 
-### Visibility Off.py
+*-* Converts FFD points to nulls.
 
-Turns off the visibility of selected objects.
+#### <img src="img/m_FFD_SelectedVerts.png" alt="FFD Selected Verts" class="icon" width="42" height="42"> FFD Selected Verts
 
-### RenderCurrentFrame.py
+*-* Adds an FFD object to selected vertices.
 
-Sets the render frame sequence to the current frame.
+#### <img src="img/m_FFDtoNulls.png" alt="FFD to Nulls" class="icon" width="42" height="42"> FFD to Nulls
 
-### Visibility Tog_01.py
+*-* Converts FFD vertices into Null objects.
 
-Toggles the visibility of selected objects.
+#### <img src="img/m_FFD_SelectedObjs.png" alt="FFD Selected Objs" class="icon" width="42" height="42"> FFD Selected Objs
 
-### Vis2.py
+*-* Adds FFD object to selected objects.
 
-Toggles the visibility of selected objects.
+#### <img src="img/m_VisibilityToggle.png" alt="Visibility Toggle" class="icon" width="42" height="42"> Visibility Toggle
 
-### m_RandomColor_Group.py
+*-* Toggles the visibility of selected objects. *Recommended to use with shortcut Shift+V*
 
-Sets a random display color to the current object or tag selection.
+#### <img src="img/m_ViewportClean.png" alt="Viewport Clean" class="icon" width="42" height="42"> Viewport Clean
 
-## License
+*-* Cleans up the viewport by toggling various display options. *Recommended to use with shortcut*
+
+#### <img src="img/m_Reset Visibility.png" alt="Reset Visibility" class="icon" width="42" height="42"> Reset Visibility
+
+*-* Resets the visibility of selected objects.
+
+#### <img src="img/m_ResetRotation.png" alt="Reset Rotation" class="icon" width="42" height="42"> Reset Rotation
+
+*-* Resets the rotation of selected objects.
+
+#### <img src="img/m_ResetPosition.png" alt="Reset Position" class="icon" width="42" height="42"> Reset Position
+
+*-* Resets the position of selected objects to the origin.
+
+#### <img src="img/m_RemoveEmptyNulls.png" alt="Remove Empty Nulls" class="icon" width="42" height="42"> Remove Empty Nulls
+
+*-* Removes empty null objects from the scene.
+
+#### <img src="img/m_BatchExportObjects.png" alt="Batch Export Objects" class="icon" width="42" height="42"> Batch Export Objects
+
+Batch exports selected objects to file root as selected format.
+
+#### <img src="img/m_ViewportClean.png" alt="Viewport Clean" class="icon" width="42" height="42"> Viewport Clean
+
+*-* Cleans up the viewport by toggling various display options.
+
+#### <img src="img/m_SetAsFocus.png" alt="Set As Focus" class="icon" width="42" height="42"> Set As Focus
+
+*-* Sets the selected object as the focus point.
+
+# License
 
 This project is licensed under the Creative Commons Legal Code CC0 1.0 Universal. See the [LICENSE](LICENSE) file for details.

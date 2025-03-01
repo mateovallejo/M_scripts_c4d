@@ -1,3 +1,10 @@
+"""
+Author: Mateo Vallejo
+Website:
+Version: 1.0.0
+Description-US:Add Quick RS Setting Preset - Make sure Advenced mode is active.
+"""
+
 import c4d
 import c4d.documents
 import redshift

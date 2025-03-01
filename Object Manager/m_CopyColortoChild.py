@@ -1,56 +1,52 @@
 """
 Author: Mateo Vallejo
 Website:
-Version: 1.0.1
-Description-US:Copy diplay color from parent to children of selected objects.
+Version: 1.0.2
+Description-US:Copy display color from parent to children of selected objects.
 """
 
 import c4d
 
 def apply_color_to_children(parent_obj, color_use, color_value):
-    # Obtén los hijos del objeto actual
+    # Get the children of the current object
     children = parent_obj.GetChildren()
     
-    # Recorre cada hijo
+    # Iterate over each child
     for child in children:
-        # Registra el estado del objeto antes de hacer los cambios
+        # Register the state of the object before making changes
         doc.AddUndo(c4d.UNDOTYPE_CHANGE, child)
         
-        # Copia la propiedad de display color del padre al hijo
+        # Copy the display color property from the parent to the child
         child[c4d.ID_BASEOBJECT_USECOLOR] = color_use
         child[c4d.ID_BASEOBJECT_COLOR] = color_value
-        child[c4d.ID_BASELIST_ICON_COLORIZE_MODE] = 2  # Asegura que el color se muestre en el icono
+        child[c4d.ID_BASELIST_ICON_COLORIZE_MODE] = 2  # Ensure the color is shown in the icon
         
-        # Llama recursivamente a la función para procesar los descendientes
+        # Recursively call the function to process the descendants
         apply_color_to_children(child, color_use, color_value)
 
 def main():
-    # Obtén los objetos seleccionados
+    # Get the selected objects
     selected = doc.GetActiveObjects(c4d.GETACTIVEOBJECTFLAGS_SELECTIONORDER)
 
-    # Verifica que haya al menos un objeto seleccionado
+    # Check that there is at least one selected object
     if not selected:
-        c4d.gui.MessageDialog("Por favor, selecciona al menos un objeto.")
+        c4d.gui.MessageDialog("Please select at least one object.")
         return
 
-    # Comienza la operación de deshacer
     doc.StartUndo()
 
-    # Recorre cada objeto seleccionado
+    # Iterate over each selected object
     for parent_obj in selected:
-        # Guarda las propiedades de color del objeto padre
+        # Save the color properties of the parent object
         color_use = parent_obj[c4d.ID_BASEOBJECT_USECOLOR]
         color_value = parent_obj[c4d.ID_BASEOBJECT_COLOR]
 
-        # Llama a la función para aplicar el color a todos los descendientes
+        # Call the function to apply the color to all descendants
         apply_color_to_children(parent_obj, color_use, color_value)
 
-    # Termina la operación de deshacer
     doc.EndUndo()
-
-    # Refresca el documento para ver los cambios
     c4d.EventAdd()
 
-# Ejecuta la función principal
+# Execute the main function
 if __name__ == '__main__':
     main()

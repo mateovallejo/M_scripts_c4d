@@ -7,7 +7,7 @@ Description-US:Batch export selected objects to file root as selected format.
 
 import c4d, os
 import c4d.documents as docs
-from c4d import gui
+from c4d import gui, storage
 # Welcome to the world of Python
 
 
@@ -124,14 +124,18 @@ def main():
     # check if anything is selected
     if not objList:
         gui.MessageDialog("Nothing selected -> nothing saved")
-
     else:
         if chosenExportMethod in fileFormatDict:
-            # create folder, if not present
-            setupFolder = docPath + "\\" + docName[0:len(docName)-4] + "_objExport" + "\\"
-            if not os.path.exists(setupFolder):
-                os.makedirs(setupFolder)
-            exportItems(objList, setupFolder, fileFormatDict[chosenExportMethod][0],
+            # Let user choose the save folder using the proper Cinema 4D API
+            title = "Select Export Folder"
+            defaultPath = docPath + os.sep + docName[0:len(docName)-4] + "_objExport"
+            setupFolder = storage.SelectFolder(title=title, def_path=defaultPath)
+            
+            if setupFolder:
+                # Ensure the folder path ends with a separator
+                if not setupFolder.endswith(os.sep):
+                    setupFolder += os.sep
+                exportItems(objList, setupFolder, fileFormatDict[chosenExportMethod][0],
                           fileFormatDict[chosenExportMethod][1])
         else:
             pass

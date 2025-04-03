@@ -129,7 +129,7 @@ def main():
             # Let user choose the save folder using the proper Cinema 4D API
             title = "Select Export Folder"
             defaultPath = docPath + os.sep + docName[0:len(docName)-4] + "_objExport"
-            setupFolder = storage.SelectFolder(title=title, def_path=defaultPath)
+            setupFolder = c4d.storage.LoadDialog(title=title, flags=c4d.FILESELECT_DIRECTORY, def_path=defaultPath)
             
             if setupFolder:
                 # Ensure the folder path ends with a separator

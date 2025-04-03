@@ -2,7 +2,7 @@ import c4d
 
 def main():
     # Get the active BaseDraw, which is used to retrieve the scene camera.
-    bd = doc.GetActiveBaseDraw()
+    bd = doc.GetRenderBaseDraw()
     cam = bd.GetSceneCamera(doc)
     if cam is None:
         c4d.gui.MessageDialog("No active camera found. Please set a scene camera first.")

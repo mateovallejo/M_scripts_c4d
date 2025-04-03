@@ -58,9 +58,12 @@ def main():
 
     # Show dropdown menu for edge count selection
     menu_items = {
+        2: "2 Edge Vertices",
         3: "3 Edge Vertices",
         4: "4 Edge Vertices",
-        5: "5 Edge Vertices"
+        5: "5 Edge Vertices",
+        6: "6 Edge Vertices",
+        7: "7 Edge Vertices"
     }
     
     selected_edge_count = create_dropdown_menu(menu_items)

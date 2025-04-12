@@ -10,7 +10,7 @@ from c4d import gui
 def create_dropdown_menu(menu_entries, icons=None):
     """
     Creates and shows a dropdown menu in Cinema 4D.
-    
+
     Args:
         menu_entries (dict): Dictionary with menu entries where:
             - Key: Integer ID for the menu item (10-99)
@@ -18,20 +18,20 @@ def create_dropdown_menu(menu_entries, icons=None):
         icons (dict, optional): Dictionary with icon IDs where:
             - Key: Same integer ID as in menu_entries
             - Value: String icon ID (e.g., "&i18171&")
-    
+
     Returns:
         int: The selected menu item ID, or None if cancelled
     """
     # Create the container for menu entries
     entries = c4d.BaseContainer()
-    
+
     # Add entries to the container
     for entry_id, label in menu_entries.items():
         # If icons are provided, prepend the icon to the label
         if icons and entry_id in icons:
             label = icons[entry_id] + " " + label
         entries.SetString(entry_id, label)
-    
+
     # Show the popup dialog at mouse position
     result = gui.ShowPopupDialog(
         cd=None,
@@ -40,7 +40,7 @@ def create_dropdown_menu(menu_entries, icons=None):
         y=c4d.MOUSEPOS,
         flags=c4d.POPUP_RIGHT
     )
-    
+
     return result
 
 def main():
@@ -63,15 +63,16 @@ def main():
         4: "4 Edge Vertices",
         5: "5 Edge Vertices",
         6: "6 Edge Vertices",
-        7: "7 Edge Vertices"
+        7: "7 Edge Vertices",
+        8: "8 Edge Vertices"
     }
-    
+
     selected_edge_count = create_dropdown_menu(menu_items)
-    
+
     # If user cancelled the dropdown, exit the function
     if selected_edge_count is None:
         return
-    
+
     # Retrieve all points and polygons from the object.
     points = obj.GetAllPoints()
     polys = obj.GetAllPolygons()
@@ -79,7 +80,7 @@ def main():
 
     # Create a list of sets to store connected vertex indices for each vertex.
     vertexEdges = [set() for _ in range(numPoints)]
-    
+
     # Loop through each polygon to determine connectivity.
     for poly in polys:
         # Get the vertex indices for the polygon.
@@ -100,11 +101,11 @@ def main():
     selTag = c4d.BaseTag(c4d.Tpointselection)
     selTag.SetName(f"{selected_edge_count} Edge Vertices")
     obj.InsertTag(selTag)
-    
+
     # Get the selection container from the new tag and clear any existing selections.
     pointSel = selTag.GetBaseSelect()
     pointSel.DeselectAll()
-    
+
     # Select vertices that have the selected number of connected edges.
     for i, connected in enumerate(vertexEdges):
         if len(connected) == selected_edge_count:

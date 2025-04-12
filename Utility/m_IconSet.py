@@ -73,31 +73,34 @@ def main():
     
     # Define menu entries with icon names
     menu_items = {
+        9: "Folder",
         10: "Light",
-        11: "Foco",
-        12: "Planeta",
-        13: "Octagono",
-        14: "Circulo",
-        15: "Estrella",
-        16: "HojaArbol",
-        17: "Lapiz",
+        11: "Spotlight",
+        12: "Planet",
+        13: "Octagon",
+        14: "Circle",
+        15: "Star",
+        16: "TreeLeaf",
+        17: "Pencil",
         18: "Cam",
         19: "Text",
-        20: "Locator",
-        21: "Piramid",
-        22: "Texto A",
-        23: "Cadena",
+        20: "Locator", 
+        21: "Pyramid",
+        22: "Text A",
+        23: "Chain",
         24: "Axis",
         25: "PixelScreen",
         26: "Polygon",
         27: "Hand",
         28: "Joint",
         29: "Matrix",
-        30: "Sculpt"
+        30: "Sculpt",
+        31: "Grass"
     }
     
     # Define icon IDs
     icon_items = {
+        9: "&i1052838&",
         10: "&i202537&",
         11: "&i200000031&",
         12: "&i17107&",
@@ -118,7 +121,8 @@ def main():
         27: "&i1022956&",
         28: "&i18185&",
         29: "&i440000235&",
-        30: "&i431000214&"
+        30: "&i431000214&",
+        31: "&i1028462&"
     }
     
     # Show the menu and get the result

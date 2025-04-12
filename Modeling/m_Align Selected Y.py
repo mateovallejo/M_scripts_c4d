@@ -57,7 +57,7 @@ def get_selected_points_from_selection(obj):
                 (polygon.d, polygon.a)
             ]
             for j, edge in enumerate(edges):
-                if edge_sel.IsSelected(4 * i + j):
+                if edge_sel.IsSelected(4*i + j):
                     points.update(edge)
         return points, 'edges'
 
@@ -81,7 +81,6 @@ def main():
     mode = doc.GetMode()  # Active selection mode
     
     # --- Object Mode (Model Mode) Alignment ---
-    # In object mode (typically c4d.Mmodel), align object positions.
     if mode == c4d.Mmodel:
         objs = doc.GetActiveObjects(0)
         if not objs:
@@ -114,42 +113,57 @@ def main():
         return
 
     # --- Sub-Object Mode Alignment ---
-    # If not in object mode, then we expect a sub-object selection (points, edges, or polygons).
     if mode not in (c4d.Mpoints, c4d.Medges, c4d.Mpolygons):
         return "No valid selection mode active. Please select points, edges, polygons or switch to object mode."
     
-    obj = doc.GetActiveObject()
-    if not obj:
-        return "No active object."
+    selected_objects = doc.GetActiveObjects(c4d.GETACTIVEOBJECTFLAGS_CHILDREN)
+    if not selected_objects:
+        return "No objects selected."
     
     doc.StartUndo()
-    doc.AddUndo(c4d.UNDOTYPE_CHANGE, obj)
     
-    # Deselect non-relevant selection types
-    if mode == c4d.Mpoints:
-        edge_sel = obj.GetEdgeS()
-        edge_sel.DeselectAll()
-        poly_sel = obj.GetPolygonS()
-        poly_sel.DeselectAll()
-    elif mode == c4d.Medges:
-        point_sel = obj.GetPointS()
-        point_sel.DeselectAll()
-        poly_sel = obj.GetPolygonS()
-        poly_sel.DeselectAll()
-    elif mode == c4d.Mpolygons:
-        point_sel = obj.GetPointS()
-        point_sel.DeselectAll()
-        edge_sel = obj.GetEdgeS()
-        edge_sel.DeselectAll()
+    # Collect all selected points across all selected objects
+    all_selected_points = []
+    for obj in selected_objects:
+        doc.AddUndo(c4d.UNDOTYPE_CHANGE, obj)
+        
+        # Deselect non-relevant selection types
+        if mode == c4d.Mpoints:
+            edge_sel = obj.GetEdgeS()
+            edge_sel.DeselectAll()
+            poly_sel = obj.GetPolygonS()
+            poly_sel.DeselectAll()
+        elif mode == c4d.Medges:
+            point_sel = obj.GetPointS()
+            point_sel.DeselectAll()
+            poly_sel = obj.GetPolygonS()
+            poly_sel.DeselectAll()
+        elif mode == c4d.Mpolygons:
+            point_sel = obj.GetPointS()
+            point_sel.DeselectAll()
+            edge_sel = obj.GetEdgeS()
+            edge_sel.DeselectAll()
+        
+        selected_points, selection_type = get_selected_points_from_selection(obj)
+        if selected_points:
+            all_points = obj.GetAllPoints()
+            # Store object reference, points indices, and their world positions
+            matrix = obj.GetMg()  # Get global matrix
+            for point_index in selected_points:
+                world_pos = matrix * all_points[point_index]  # Convert to world space
+                all_selected_points.append({
+                    'obj': obj,
+                    'index': point_index,
+                    'world_pos': world_pos
+                })
     
-    selected_points, selection_type = get_selected_points_from_selection(obj)
-    if not selected_points:
+    if not all_selected_points:
+        doc.EndUndo()
         return "No vertices/edges/faces selected."
     
-    all_points = obj.GetAllPoints()
-    y_values = [all_points[i].y for i in selected_points]
+    # Calculate target Y position in world space
+    y_values = [p['world_pos'].y for p in all_selected_points]
     
-    # Determine the alignment value based on modifier keys
     if isAltPressed():
         align_value = max(y_values)
     elif isCtrlPressed():
@@ -157,12 +171,23 @@ def main():
     else:
         align_value = sum(y_values) / len(y_values)
     
-    # Align selected points to the computed Y value
-    for i in selected_points:
-        all_points[i].y = align_value
-    
-    obj.SetAllPoints(all_points)
-    obj.Message(c4d.MSG_UPDATE)
+    # Apply alignment to all points
+    processed_objects = set()
+    for point_data in all_selected_points:
+        obj = point_data['obj']
+        if obj not in processed_objects:
+            all_points = obj.GetAllPoints()
+            processed_objects.add(obj)
+        
+        # Convert desired world position back to local space
+        matrix_inv = ~obj.GetMg()  # Get inverse global matrix
+        world_target = c4d.Vector(point_data['world_pos'].x, align_value, point_data['world_pos'].z)
+        local_pos = matrix_inv * world_target
+        all_points[point_data['index']].y = local_pos.y
+        
+        if obj in processed_objects:
+            obj.SetAllPoints(all_points)
+            obj.Message(c4d.MSG_UPDATE)
     
     doc.EndUndo()
     c4d.EventAdd()

@@ -21,6 +21,10 @@ def main():
         obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_Y] = 0
         obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_Z] = 0
 
+    # Record keyframes for all selected objects (Autokey support)
+    if selected_objects:
+        c4d.CallCommand(12410)  # Record Active Objects
+
     # End the undo action
     doc.EndUndo()
 

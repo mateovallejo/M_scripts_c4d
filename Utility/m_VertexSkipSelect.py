@@ -1,3 +1,9 @@
+"""
+Author: Mateo Vallejo
+Version: 1.0.0
+Description: Create vertex selection skipping every two vertices based on index, CTRL: Input dialog to set custom skip value.
+"""
+
 import c4d
 
 # Defines constants to know if the dialog ask an integer or a float

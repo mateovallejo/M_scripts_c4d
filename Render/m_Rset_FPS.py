@@ -1,3 +1,8 @@
+"""
+Author: Mateo Vallejo
+Version: 1.0.0
+Description: Set project FPS to 24, 25 or 30.
+"""
 import c4d
 from c4d import gui
 

@@ -1,6 +1,6 @@
 """
 Author: Mateo Vallejo
-Version: 1.1.0
+Version: 1.2.0
 Description: Creates a primitive that matches the bounding box dimensions of selected objects.
 - Choose from Box, Sphere, Cylinder, Cone, Pyramid, Tube, or Capsule
 - Works in both Object Mode and Sub-Object Mode
@@ -22,9 +22,10 @@ def isAltPressed():
             return True
     return False
 
-def calculate_bounding_box_objects(obj, min_point, max_point):
+def calculate_bounding_box_objects(obj, min_point, max_point, ref_inv_mg=None):
     """
-    Recursively compute the bounding box of an object and its children (in global coordinates).
+    Recursively compute the bounding box of an object and its children (in reference local coordinates).
+    ref_inv_mg: The inverse global matrix of the reference object (for orientation matching).
     """
     poly_obj = obj.GetCache()
     if poly_obj is None:
@@ -35,18 +36,22 @@ def calculate_bounding_box_objects(obj, min_point, max_point):
 
     for p in points:
         p_global = mg * p
-        min_point = Vector(min(min_point.x, p_global.x),
-                           min(min_point.y, p_global.y),
-                           min(min_point.z, p_global.z))
-        max_point = Vector(max(max_point.x, p_global.x),
-                           max(max_point.y, p_global.y),
-                           max(max_point.z, p_global.z))
-    
+        if ref_inv_mg is not None:
+            p_local = ref_inv_mg * p_global
+        else:
+            p_local = p_global
+        min_point = Vector(min(min_point.x, p_local.x),
+                           min(min_point.y, p_local.y),
+                           min(min_point.z, p_local.z))
+        max_point = Vector(max(max_point.x, p_local.x),
+                           max(max_point.y, p_local.y),
+                           max(max_point.z, p_local.z))
+
     child = obj.GetDown()
     while child:
-        min_point, max_point = calculate_bounding_box_objects(child, min_point, max_point)
+        min_point, max_point = calculate_bounding_box_objects(child, min_point, max_point, ref_inv_mg)
         child = child.GetNext()
-    
+
     return min_point, max_point
 
 def get_selected_points_from_selection(obj):
@@ -117,52 +122,60 @@ def create_dropdown_menu():
         flags=c4d.POPUP_RIGHT
     )
 
-def create_bounding_primitive(primitive_type, min_point, max_point, doc):
+def create_bounding_primitive(primitive_type, min_point, max_point, doc, ref_mg=None):
     """
-    Creates a primitive that matches the bounding box dimensions.
+    Creates a primitive that matches the bounding box dimensions and orientation.
+    ref_mg: The global matrix to apply to the primitive (for orientation matching).
     """
     size = max_point - min_point
     center = (max_point + min_point) / 2
-    
+
     primitive = c4d.BaseObject(primitive_type)
-    
+
     # Set dimensions based on primitive type
     if primitive_type == c4d.Ocube:
         primitive[c4d.PRIM_CUBE_LEN] = size
-    
+
     elif primitive_type == c4d.Osphere:
         radius = max(size.x, size.y, size.z) / 2
         primitive[c4d.PRIM_SPHERE_RAD] = radius
-    
+
     elif primitive_type == c4d.Ocylinder:
         radius = max(size.x, size.z) / 2
         primitive[c4d.PRIM_CYLINDER_RADIUS] = radius
         primitive[c4d.PRIM_CYLINDER_HEIGHT] = size.y
-    
+
     elif primitive_type == c4d.Ocone:
         radius = max(size.x, size.z) / 2
         primitive[c4d.PRIM_CONE_TRAD] = 0
         primitive[c4d.PRIM_CONE_BRAD] = radius
         primitive[c4d.PRIM_CONE_HEIGHT] = size.y
-    
+
     elif primitive_type == c4d.Opyramid:
         primitive[c4d.PRIM_PYRAMID_LEN] = size  # Fixed: Using correct parameter for pyramid
-    
+
     elif primitive_type == c4d.Otube:
         radius = max(size.x, size.z) / 2
         primitive[c4d.PRIM_TUBE_ORAD] = radius
         primitive[c4d.PRIM_TUBE_IRAD] = radius * 0.8
         primitive[c4d.PRIM_TUBE_HEIGHT] = size.y
-    
+
     elif primitive_type == c4d.Ocapsule:
         radius = max(size.x, size.z) / 2
         primitive[c4d.PRIM_CAPSULE_RADIUS] = radius
         primitive[c4d.PRIM_CAPSULE_HEIGHT] = size.y
-    
-    primitive.SetAbsPos(center)
+
+    # Set the primitive's matrix to match the reference orientation and position
+    if ref_mg is not None:
+        # Place the primitive at the bounding box center in local space, then transform to world
+        mg = c4d.Matrix(center, c4d.Vector(1,0,0), c4d.Vector(0,1,0), c4d.Vector(0,0,1))
+        primitive.SetMg(ref_mg * mg)
+    else:
+        primitive.SetAbsPos(center)
+
     doc.InsertObject(primitive)
     doc.AddUndo(c4d.UNDOTYPE_NEW, primitive)
-    
+
     return primitive
 
 def main():
@@ -181,57 +194,67 @@ def main():
         if not selection:
             c4d.gui.MessageDialog("No objects selected.")
             return
-        
-        # Initialize bounding box with first point
-        obj = selection[0]
-        points = obj.GetAllPoints()
+
+        # Use the first selected object's orientation as reference
+        ref_obj = selection[0]
+        ref_mg = ref_obj.GetMg()
+        ref_inv_mg = ~ref_mg
+
+        # Initialize bounding box in reference local space
+        points = ref_obj.GetAllPoints()
         if not points:
             c4d.gui.MessageDialog("Selected object has no points.")
             return
-        
-        p = obj.GetMg() * points[0]
+
+        p = ref_inv_mg * (ref_mg * points[0])
         min_point = Vector(p)
         max_point = Vector(p)
-        
-        # Calculate bounds for all selected objects
+
+        # Calculate bounds for all selected objects in reference local space
         for obj in selection:
-            min_point, max_point = calculate_bounding_box_objects(obj, min_point, max_point)
-    
+            min_point, max_point = calculate_bounding_box_objects(obj, min_point, max_point, ref_inv_mg)
+
+        # Create the selected primitive with orientation
+        primitive = create_bounding_primitive(primitive_type, min_point, max_point, doc, ref_mg)
+
     elif mode in (c4d.Mpoints, c4d.Medges, c4d.Mpolygons):
         # Sub-object mode - handle active selection
         obj = doc.GetActiveObject()
         if not obj or not obj.IsInstanceOf(c4d.Opolygon):
             c4d.gui.MessageDialog("No valid polygon object selected.")
             return
-        
+
         selected_points, _ = get_selected_points_from_selection(obj)
         if not selected_points:
             c4d.gui.MessageDialog("No sub-object elements selected.")
             return
-        
-        # Calculate bounds for selected points
+
+        # Use the object's orientation as reference
+        ref_mg = obj.GetMg()
+        ref_inv_mg = ~ref_mg
+
+        # Calculate bounds for selected points in reference local space
         points = obj.GetAllPoints()
-        mg = obj.GetMg()
-        first_point = mg * points[next(iter(selected_points))]
+        first_point = ref_inv_mg * (ref_mg * points[next(iter(selected_points))])
         min_point = Vector(first_point)
         max_point = Vector(first_point)
-        
+
         for i in selected_points:
-            p = mg * points[i]
+            p = ref_inv_mg * (ref_mg * points[i])
             min_point.x = min(min_point.x, p.x)
             min_point.y = min(min_point.y, p.y)
             min_point.z = min(min_point.z, p.z)
             max_point.x = max(max_point.x, p.x)
             max_point.y = max(max_point.y, p.y)
             max_point.z = max(max_point.z, p.z)
-    
+
+        # Create the selected primitive with orientation
+        primitive = create_bounding_primitive(primitive_type, min_point, max_point, doc, ref_mg)
+
     else:
         c4d.gui.MessageDialog("Please switch to Object Mode or Sub-Object Mode.")
         return
-    
-    # Create the selected primitive
-    primitive = create_bounding_primitive(primitive_type, min_point, max_point, doc)
-    
+
     doc.EndUndo()
     doc.SetActiveObject(primitive, c4d.SELECTION_NEW)
     c4d.EventAdd()

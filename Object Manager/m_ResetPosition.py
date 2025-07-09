@@ -21,8 +21,8 @@ def main():
         obj[c4d.ID_BASEOBJECT_REL_POSITION, c4d.VECTOR_Z] = 0
 
     # Record keyframes for all selected objects (Autokey support)
-    if selected_objects:
-        c4d.CallCommand(12410)  # Record Active Objects
+#    if selected_objects:
+#        c4d.CallCommand(12410)  # Record Active Objects
 
     # Update the scene
     doc.EndUndo()

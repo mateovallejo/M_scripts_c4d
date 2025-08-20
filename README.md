@@ -1,11 +1,37 @@
-# m_Scripts_1.2.0 C4D
+# m_Scripts_1.2.1 C4D
 
 A collection of Python scripts for Cinema 4D. These scripts provide various functionalities to enhance and speedup your workflow. Some are mostly shorcuts to simple tasks.
 
 ## Changelog
 
+### **Latest Version 1.2.1** - *(20.08.2025)*
 
-### **Latest Version 1.2.0** - *(25.02.2025)*
+#### *Added*
+Animation:
+ - m_PrevRange_FromKeyframes - Set preview range from keyframes
+ - m_PrevRange_FromRender - Set preview range from render settings
+
+Modeling:
+ - m_AxisLock_X/Y/Z - Lock object movement to specific axes
+
+Object Manager:
+ - m_SelectParents - Select parent objects
+
+Render:
+ - m_Rset_FPS - FPS control
+ - m_FrameRange_Selected - Set take range from selection
+ - Additional Redshift bucket sizes (128, 256)
+
+Utility:
+ - m_BoundingPrimitives - Create bounding primitives
+ - m_CycleTakes - Cycle through takes
+ - m_GotoPreviewStart/End - Timeline navigation
+ - m_IconSet - Icon management
+ - m_RenderPath - Render path management
+ - m_VertexNumSelect - Vertex selection by number
+ - m_VertexSkipSelect - Vertex selection with skip pattern
+
+### **Version 1.2.0** - *(25.02.2025)*
 
 #### *Updated*
  - m_AlignToSelected - Updated to work on multiple objects
@@ -71,6 +97,14 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 *-* Repeats the animation curve before and after.
 
+#### <img src="img/m_PrevRange_FromKeyframes.png" alt="PrevRange From Keyframes" class="icon" width="42" height="42"> PrevRange From Keyframes
+
+*-* Sets the preview range based on the keyframe range of selected objects.
+
+#### <img src="img/m_PreviewFromRenderRange.png" alt="PrevRange From Render" class="icon" width="42" height="42"> PrevRange From Render
+
+*-* Sets the preview range based on the render settings frame range.
+
 ## Modeling
 
 #### <img src="img/m_AlignSelected_X.png" alt="Align Selected X" class="icon" width="42" height="42"> Align Selected X
@@ -96,6 +130,10 @@ Some of the scripts have multiple functions and you can use those with key modif
 #### <img src="img/m_AlignZeroSelected_Z.png" alt="Align Zero Selected Z" class="icon" width="42" height="42"> Align Zero Selected Z
 
 *-* Aligns selected vertices to the origin on the Z axis.
+
+#### <img src="img/m_AxisLock_X.png" alt="Axis Lock X" class="icon" width="42" height="42"> <img src="img/m_AxisLock_Y.png" alt="Axis Lock Y" class="icon" width="42" height="42"> <img src="img/m_AxisLock_Z.png" alt="Axis Lock Z" class="icon" width="42" height="42"> Axis Lock X/Y/Z
+
+*-* Locks the movement of objects to specific axes.
 
 #### <img src="img/m_FlattenPolygons.png" alt="Flatten Polygons" class="icon" width="42" height="42"> Flatten Polygons
 
@@ -138,6 +176,10 @@ Some of the scripts have multiple functions and you can use those with key modif
 #### <img src="img/m_SelectChildren.png" alt="Select Children" class="icon" width="42" height="42"> Select Children
 
 *-* Selects the children of the selected objects.
+
+#### <img src="img/m_SelectParents.png" alt="Select Parents" class="icon" width="42" height="42"> Select Parents
+
+*-* Selects the parent objects of the current selection.
 
 #### <img src="img/m_HierarchyMoveDN.png" alt="Hierarchy Move Down" class="icon" width="42" height="42"> Hierarchy Move Down
 
@@ -199,6 +241,26 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 *-* Sets the frame range to "Preview Range".
 
+#### <img src="img/m_RenderSetup_div2.png" alt="Render Set Resolution Div/2" class="icon" width="42" height="42"> Render Set Resolution Div/2
+
+*-* Divides the current render resolution by 2.
+
+#### <img src="img/m_RenderSetup_x2.png" alt="Render Set Resolution Mult/2" class="icon" width="42" height="42"> Render Set Resolution Mult/2
+
+*-* Multiplies the current render resolution by 2.
+
+#### <img src="img/m_RenderSetup_SaveONOFF.png" alt="Render Set Save ON/OFF" class="icon" width="42" height="42"> Render Set Save ON/OFF
+
+*-* Toggles the render save option on/off.
+
+#### <img src="img/m_Rset_FPS.png" alt="Set FPS" class="icon" width="42" height="42"> Set FPS
+
+*-* Sets the project frames per second.
+
+#### <img src="img/m_FrameRange_Selected.png" alt="Set Take Frame Range Selected" class="icon" width="42" height="42"> Set Take Frame Range Selected
+
+*-* Sets the take frame range based on the selected objects first and last keyframes on the timeline.
+
 #### <img src="img/m_rsSet_BaseSetting.png" alt="Sampling CTRL" class="icon" width="42" height="42"> Quick Redshift Render Setting Preset
 
 *-* Configures the Redshift renderer to a Basic quick render setting:
@@ -219,6 +281,14 @@ Some of the scripts have multiple functions and you can use those with key modif
 #### <img src="img/m_rsSet_Bucket64.png" alt="Bucket 64" class="icon" width="42" height="42"> Bucket 64
 
 *-* Sets the Redshift bucket size to 64.
+
+#### <img src="img/m_rsSet_Bucket128.png" alt="Bucket 128" class="icon" width="42" height="42"> Bucket 128
+
+*-* Sets the Redshift bucket size to 128.
+
+#### <img src="img/m_rsSet_Bucket256.png" alt="Bucket 256" class="icon" width="42" height="42"> Bucket 256
+
+*-* Sets the Redshift bucket size to 256.
 
 #### <img src="img/m_rsSet_Bucket512.png" alt="Bucket 512" class="icon" width="42" height="42"> Bucket 512
 
@@ -267,14 +337,6 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 *-* Adds an FFD object to selected vertices.
 
-#### <img src="img/m_FFDtoNulls.png" alt="FFD to Nulls" class="icon" width="42" height="42"> FFD to Nulls
-
-*-* Converts FFD vertices into Null objects.
-
-#### <img src="img/m_FFD_SelectedObjs.png" alt="FFD Selected Objs" class="icon" width="42" height="42"> FFD Selected Objs
-
-*-* Adds FFD object to selected objects.
-
 #### <img src="img/m_VisibilityToggle.png" alt="Visibility Toggle" class="icon" width="42" height="42"> Visibility Toggle
 
 *-* Toggles the visibility of selected objects. *Recommended to use with shortcut Shift+V*
@@ -282,6 +344,22 @@ Some of the scripts have multiple functions and you can use those with key modif
 #### <img src="img/m_ViewportClean.png" alt="Viewport Clean" class="icon" width="42" height="42"> Viewport Clean
 
 *-* Cleans up the viewport by toggling various display options. *Recommended to use with shortcut*
+
+#### <img src="img/m_GotoPreviewStart.png" alt="Go To Preview Start" class="icon" width="42" height="42"> <img src="img/m_GotoPreviewEnd.png" alt="Go To Preview End" class="icon" width="42" height="42"> Go To Preview Start/End
+
+*-* Jumps to the start or end of the preview range.
+
+#### <img src="img/m_IconSet.png" alt="Icon Set" class="icon" width="42" height="42"> Icon Set
+
+*-* Manages icon settings.
+
+#### <img src="img/m_VertexNumSelect.png" alt="Vertex Number Select" class="icon" width="42" height="42"> Vertex Number Select
+
+*-* Selects vertices based on their number.
+
+#### <img src="img/m_VertexSkipSelect.png" alt="Vertex Skip Select" class="icon" width="42" height="42"> Vertex Skip Select
+
+*-* Selects vertices with a skip pattern.
 
 #### <img src="img/m_Reset Visibility.png" alt="Reset Visibility" class="icon" width="42" height="42"> Reset Visibility
 
@@ -301,11 +379,19 @@ Some of the scripts have multiple functions and you can use those with key modif
 
 #### <img src="img/m_BatchExportObjects.png" alt="Batch Export Objects" class="icon" width="42" height="42"> Batch Export Objects
 
-Batch exports selected objects to file root as selected format.
+*-* Batch exports selected objects to file root as selected format.
 
-#### <img src="img/m_ViewportClean.png" alt="Viewport Clean" class="icon" width="42" height="42"> Viewport Clean
+#### <img src="img/m_BoundingPrimitives.png" alt="Bounding Primitives" class="icon" width="42" height="42"> Bounding Primitives
 
-*-* Cleans up the viewport by toggling various display options.
+*-* Creates bounding primitive shapes around objects.
+
+#### <img src="img/m_CycleTakes.png" alt="Cycle Takes" class="icon" width="42" height="42"> Cycle Takes
+
+*-* Cycles through available takes in the project.
+
+#### <img src="img/m_RenderPath.png" alt="Render Path" class="icon" width="42" height="42"> Render Path
+
+*-* Manages render output paths.
 
 #### <img src="img/m_SetAsFocus.png" alt="Set As Focus" class="icon" width="42" height="42"> Set As Focus
 

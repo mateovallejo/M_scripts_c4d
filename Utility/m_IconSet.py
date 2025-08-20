@@ -73,6 +73,7 @@ def main():
 
     # Define menu entries with icon names
     menu_items = {
+        8: "Default",
         9: "Folder",
         10: "Light",
         11: "Spotlight",
@@ -101,6 +102,7 @@ def main():
 
     # Define icon IDs
     icon_items = {
+        8: "",
         9: "&i1052838&",
         10: "&i202537&",
         11: "&i200000031&",

@@ -1,5 +1,5 @@
 """
-Author: Mateo Vallejo (modified by ChatGPT)
+Author: Mateo Vallejo (modified by GitHub Copilot)
 Website:
 Version: 1.1.0
 Description-US: Align selected elements on Z.
@@ -86,14 +86,11 @@ def main():
         objs = doc.GetActiveObjects(0)
         if not objs:
             return "No objects selected."
-            
         doc.StartUndo()
         for obj in objs:
             doc.AddUndo(c4d.UNDOTYPE_CHANGE, obj)
-        
         # Gather all Z positions from the objects (using absolute/global positions)
         z_values = [obj.GetAbsPos().z for obj in objs]
-        
         # Determine alignment value based on modifier keys
         if isAltPressed():
             align_value = max(z_values)
@@ -101,14 +98,12 @@ def main():
             align_value = min(z_values)
         else:
             align_value = sum(z_values) / len(z_values)
-        
         # Align each object to the computed Z value
         for obj in objs:
             pos = obj.GetAbsPos()
             pos.z = align_value
             obj.SetAbsPos(pos)
             obj.Message(c4d.MSG_UPDATE)
-        
         doc.EndUndo()
         c4d.EventAdd()
         return
@@ -165,14 +160,12 @@ def main():
     
     # Calculate target Z position in world space
     z_values = [p['world_pos'].z for p in all_selected_points]
-    
     if isAltPressed():
         align_value = max(z_values)
     elif isCtrlPressed():
         align_value = min(z_values)
     else:
         align_value = sum(z_values) / len(z_values)
-    
     # Apply alignment to all points
     processed_objects = set()
     for point_data in all_selected_points:
@@ -180,17 +173,14 @@ def main():
         if obj not in processed_objects:
             all_points = obj.GetAllPoints()
             processed_objects.add(obj)
-        
         # Convert desired world position back to local space
         matrix_inv = ~obj.GetMg()  # Get inverse global matrix
         world_target = c4d.Vector(point_data['world_pos'].x, point_data['world_pos'].y, align_value)
         local_pos = matrix_inv * world_target
         all_points[point_data['index']].z = local_pos.z
-        
         if obj in processed_objects:
             obj.SetAllPoints(all_points)
             obj.Message(c4d.MSG_UPDATE)
-    
     doc.EndUndo()
     c4d.EventAdd()
 

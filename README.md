@@ -1,11 +1,11 @@
-# m_Scripts_1.1.0 C4D
+# m_Scripts_1.2.0 C4D
 
 A collection of Python scripts for Cinema 4D. These scripts provide various functionalities to enhance and speedup your workflow. Some are mostly shorcuts to simple tasks.
 
 ## Changelog
 
 
-### **Latest Version 1.2.0** - *(19.25.2025)*
+### **Latest Version 1.2.0** - *(25.02.2025)*
 
 #### *Updated*
  - m_AlignToSelected - Updated to work on multiple objects

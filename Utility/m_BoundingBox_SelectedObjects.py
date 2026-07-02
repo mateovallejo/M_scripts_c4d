@@ -1,6 +1,6 @@
 """
-Author: Mateo Vallejo (modificado)
-Website:
+Author: Mateo Vallejo
+Website: https://mateovallejo.com
 Version: 1.3.3
 Description-US: Create a Box object or an FFD deformer around selected objects or sub-object selection based on their bounding box.
              - In Object Mode, the bounding box is computed for all selected objects (including children).

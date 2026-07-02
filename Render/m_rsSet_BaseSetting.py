@@ -1,6 +1,6 @@
 """
 Author: Mateo Vallejo
-Website:
+Website: https://mateovallejo.com
 Version: 1.0.0
 Description-US:Add Quick RS Setting Preset - Make sure Advenced mode is active.
 """

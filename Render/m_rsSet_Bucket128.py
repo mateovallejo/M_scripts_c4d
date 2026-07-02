@@ -1,6 +1,6 @@
 """
 Author: Mateo Vallejo
-Website:
+Website: https://mateovallejo.com
 Version: 1.0.0
 Description-US:Sets RS renderer bucket size to 128.
 """

@@ -315,7 +315,6 @@ def main():
                     s.ChangeNBit(c4d.NBIT_OM1_FOLD, c4d.NBITCONTROL_TOGGLE)
                 doc.AddUndo(c4d.UNDOTYPE_CHANGE, s)
                 s.DelBit(c4d.BIT_ACTIVE)
-
     doc.EndUndo()
     c4d.EventAdd()
 

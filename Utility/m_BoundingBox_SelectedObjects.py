@@ -7,6 +7,7 @@ Description-US: Create a Box object or an FFD deformer around selected objects o
              - In Sub-Object Mode (Points/Edges/Polygons), only the currently active selection is considered.
                The script forces a single selection type based on the active mode.
              - If the ALT key is pressed, an FFD deformer is created instead of a box.
+             - The FFD deformer is created as a child of the object used to compute the bounding box.
 """
 
 import c4d
@@ -129,12 +130,18 @@ def main():
     mode = doc.GetMode()  # Active selection mode
     doc.StartUndo()
     
+    # parent_obj will hold the object that the FFD deformer should be parented to.
+    parent_obj = None
+    
     # --- Object Mode: Process all selected objects ---
     if mode == c4d.Mmodel:
         selection = doc.GetActiveObjects(c4d.GETACTIVEOBJECTFLAGS_CHILDREN)
         if not selection:
             c4d.gui.MessageDialog("No objects selected.")
             return
+        
+        # The FFD (when created) will be parented to the first selected object.
+        parent_obj = selection[0]
         
         # Initialize bounding box using the first selected object's first point.
         obj = selection[0]
@@ -159,6 +166,9 @@ def main():
         if not obj or not obj.IsInstanceOf(c4d.Opolygon):
             c4d.gui.MessageDialog("No valid polygon object active.")
             return
+
+        # The FFD (when created) will be parented to the active object.
+        parent_obj = obj
 
         # Force only one type of sub-object selection based on the current mode.
         if mode == c4d.Mpoints:
@@ -186,25 +196,38 @@ def main():
     size = max_point - min_point
     center = (max_point + min_point) / 2
     
+    # Build the desired GLOBAL matrix (world-space position, no rotation/scale
+    # change needed since the bounding box is axis-aligned in world space).
+    # NOTE: SetAbsPos/GetAbsPos are NOT global-position accessors - they relate
+    # to Cinema 4D's Freeze Transformation state and are unrelated to parenting.
+    # SetMg() is the correct call: it takes a global matrix and internally
+    # converts it into the correct local matrix relative to the object's parent,
+    # so this works whether or not the parent is at the origin, rotated, or scaled.
+    target_mg = c4d.Matrix()
+    target_mg.off = center
+
     # --- Create object based on input state ---
     if isAltPressed():
-        # Create an FFD deformer.
+        # Create an FFD deformer as a CHILD of the source object.
         new_obj = c4d.BaseObject(c4d.Offd)
         new_obj[c4d.FFDOBJECT_SIZE] = size
-        new_obj.SetAbsPos(center)
-        # Insert the FFD and call the reset BEFORE adding the undo.
-        doc.InsertObject(new_obj)
+
+        # Insert under parent_obj FIRST so that SetMg computes the local
+        # matrix relative to the correct parent.
+        doc.InsertObject(new_obj, parent=parent_obj)
         doc.AddUndo(c4d.UNDOTYPE_NEW, new_obj)
+
+        new_obj.SetMg(target_mg)
         c4d.CallButton(new_obj, c4d.FFDOBJECT_RESET)
-        # Now add the undo for the FFD creation (including the reset state)
+        # Add an additional undo step to capture the post-reset state.
         doc.AddUndo(c4d.UNDOTYPE_NEW, new_obj)
     else:
-        # Create a Cube.
+        # Create a Cube (unparented, same as before).
         new_obj = c4d.BaseObject(c4d.Ocube)
         new_obj[c4d.PRIM_CUBE_LEN] = size
-        new_obj.SetAbsPos(center)
-        doc.InsertObject(new_obj)
+        doc.InsertObject(new_obj, parent=parent_obj)
         doc.AddUndo(c4d.UNDOTYPE_NEW, new_obj)
+        new_obj.SetMg(target_mg)
     
     doc.EndUndo()
     c4d.EventAdd()

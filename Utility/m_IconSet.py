@@ -97,7 +97,8 @@ def main():
         29: "Matrix",
         30: "Sculpt",
         31: "Grass",
-        32: "Stage"
+        32: "Stage",
+        33: "Spline"
     }
 
     # Define icon IDs
@@ -126,7 +127,8 @@ def main():
         29: "&i440000235&",
         30: "&i431000214&",
         31: "&i1028462&",
-        32: "&i5136&"
+        32: "&i5136&",
+        33: "&i%d&" % c4d.Ospline
     }
 
     # Show the menu and get the result

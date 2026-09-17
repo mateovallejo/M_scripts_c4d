@@ -40,7 +40,8 @@ def main():
         13: "../3D_Anim/$take/$take",
         14: "../../Dailies/$take_$MM$DD",
         15: "../../Dailies/$prj_$MM$DD",
-        16: "../../Rnd/$prj/$prj_$camera_",
+        16: "../../Dailies/$MM$DD/$MM$DD_$prj",
+        17: "../../Rnd/$prj/$prj_$camera_",
     }
 
     # Define icons for the menu
@@ -52,6 +53,7 @@ def main():
         14: "&i37000&",
         15: "&i37000&",
         16: "&i37000&",
+        17: "&i37000&",
     }    
     
     # Show dropdown menu

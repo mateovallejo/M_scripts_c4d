@@ -76,7 +76,7 @@ def main():
         8: "Default",
         9: "Folder",
         10: "Light",
-        11: "Spotlight",
+        11: "Vertex",
         12: "Planet",
         13: "Octagon",
         14: "Circle",
@@ -98,7 +98,8 @@ def main():
         30: "Sculpt",
         31: "Grass",
         32: "Stage",
-        33: "Spline"
+        33: "Spline",
+        34: "Spotlight"
     }
 
     # Define icon IDs
@@ -106,7 +107,7 @@ def main():
         8: "",
         9: "&i1052838&",
         10: "&i202537&",
-        11: "&i200000031&",
+        11: "&i%d&" % c4d.Tvertexmap,
         12: "&i17107&",
         13: "&i1058519&",
         14: "&i1058513&",
@@ -128,7 +129,8 @@ def main():
         30: "&i431000214&",
         31: "&i1028462&",
         32: "&i5136&",
-        33: "&i%d&" % c4d.Ospline
+        33: "&i%d&" % c4d.Ospline,
+        34: "&i200000031&"
     }
 
     # Show the menu and get the result

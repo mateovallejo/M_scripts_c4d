@@ -36,12 +36,13 @@ def main():
     path_presets = {
         10: "../3D_Render/$prj/$prj",
         11: "../3D_Render/$take/$take",
-        12: "../3D_Anim/$prj",
-        13: "../3D_Anim/$take/$take",
-        14: "../../Dailies/$take_$MM$DD",
-        15: "../../Dailies/$prj_$MM$DD",
-        16: "../../Dailies/$MM$DD/$MM$DD_$prj",
-        17: "../../Rnd/$prj/$prj_$camera_",
+        12: "../3D_Render/Still/$prj/$take",
+        13: "../3D_Anim/$prj",
+        14: "../3D_Anim/$take/$take",
+        15: "../../Dailies/$take_$MM$DD",
+        16: "../../Dailies/$prj_$MM$DD",
+        17: "../../Dailies/$MM$DD/$MM$DD_$prj",
+        18: "../../Rnd/$prj/$prj_$camera_",
     }
 
     # Define icons for the menu
@@ -54,6 +55,7 @@ def main():
         15: "&i37000&",
         16: "&i37000&",
         17: "&i37000&",
+        18: "&i37000&",
     }    
     
     # Show dropdown menu

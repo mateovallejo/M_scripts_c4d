@@ -1,17 +1,14 @@
 """
 Author: Mateo Vallejo
 Website: http://mateovallejo.com/
-Name-US: m_PyTagMatchChildrenColor
+Name-US: m_PyTagLayerFromObject
 Version: 1.0.0
-Description-US: Adds a custom python tag for selected object(s) that matches children's display color to the parent's
+Description-US: Adds a custom python tag for selected object(s) that creates a layer named after the object and assigns all its children to that layer
 Written for Maxon Cinema 4D R25.117
 Python version 3.9.1
-Change log:
-1.0.0 (31.07.2026) - First version
 """
 # Libraries
 import c4d
-from c4d import utils as u
 
 # Functions
 def CreateUserDataCycle(obj, name, val, parentGroup=None, unit=c4d.DESC_UNIT_LONG):
@@ -48,61 +45,94 @@ def CreateUserDataBool(obj, name, val, parentGroup=None):
 def CreatePythonTag(obj):
     pyTag = c4d.BaseTag(1022749)
     scriptPath = __file__
-    iconPath = scriptPath.rsplit('.', 1)[0]+".tif"
+    iconPath = scriptPath.rsplit('.', 1)[0] + ".tif"
     pyTag[c4d.ID_BASELIST_ICON_FILE] = iconPath
-    pyTag.SetName("m_MatchChildrenColor")
+    pyTag.SetName("m_LayerFromObject")
     obj.InsertTag(pyTag)
-    doc.AddUndo(c4d.UNDOTYPE_NEWOBJ, pyTag)
-    CreateUserDataCycle(pyTag, "Method", "Direct Children,Recursive")
-    CreateUserDataBool(pyTag, "Force Use Color", True)
+    doc.AddUndo(c4d.UNDOTYPE_NEW, pyTag)
+    CreateUserDataCycle(pyTag, "Method", "Recursive, Direct Children")  # ID 1
+    CreateUserDataBool(pyTag, "Include Parent", True)                 # ID 2
     # Python Tag code
     # -------------------------------------------------------
-    pyTag[c4d.TPYTHON_CODE] = "# AR_MatchChildrenColor (Python Tag)\n\
-# Author: Mateo Vallejo\n\
-# Website: http://mateovallejo.com/\n\
-# Version: 1.0.0\n\
-\n\
-# Libraries\n\
-import c4d\n\
-\n\
-# Functions\n\
-def SetChildColor(child, color, forceUseColor):\n\
-    if forceUseColor:\n\
-        child[c4d.ID_BASEOBJECT_USECOLOR] = 2 # Always\n\
-    child[c4d.ID_BASEOBJECT_COLOR] = color\n\
-\n\
-def CollectChildren(obj, recursive):\n\
-    children = []\n\
-    child = obj.GetDown()\n\
-    while child is not None:\n\
-        children.append(child)\n\
-        if recursive:\n\
-            children += CollectChildren(child, recursive)\n\
-        child = child.GetNext()\n\
-    return children\n\
-\n\
-def main():\n\
-    obj = op.GetObject() # Get object\n\
-    method = op[c4d.ID_USERDATA,1]\n\
-    forceUseColor = op[c4d.ID_USERDATA,2]\n\
-    color = obj[c4d.ID_BASEOBJECT_COLOR] # Parent's display color\n\
-    recursive = (method == 1)\n\
-    children = CollectChildren(obj, recursive)\n\
-    for child in children:\n\
-        SetChildColor(child, color, forceUseColor)\n\
-    return True # All good"
-    # -------------------------------------------------------
-    return True # All good
+    pyTag[c4d.TPYTHON_CODE] = r"""# m_LayerFromObject (Python Tag)
+# Author: Mateo Vallejo
+# Website: http://mateovallejo.com/
+# Version: 1.0.0
+
+# Libraries
+import c4d
+
+# Functions
+def FindLayerByName(layer, name):
+    # Search the layer hierarchy (recursively) for a layer with the given name
+    while layer is not None:
+        if layer.GetName() == name:
+            return layer
+        found = FindLayerByName(layer.GetDown(), name)
+        if found is not None:
+            return found
+        layer = layer.GetNext()
+    return None
+
+def GetOrCreateLayer(doc, name):
+    root = doc.GetLayerObjectRoot()
+    layer = FindLayerByName(root.GetDown(), name)
+    if layer is None:
+        layer = c4d.documents.LayerObject()
+        layer.SetName(name)
+        layer.InsertUnder(root)
+    return layer
+
+def CollectChildren(obj, recursive):
+    children = []
+    child = obj.GetDown()
+    while child is not None:
+        children.append(child)
+        if recursive:
+            children += CollectChildren(child, recursive)
+        child = child.GetNext()
+    return children
 
 def main():
-    doc.StartUndo() # Start recording undos
+    obj = op.GetObject()
+    if obj is None:
+        return
+
+    method = op[c4d.ID_USERDATA, 1]
+    includeParent = op[c4d.ID_USERDATA, 2]
+    recursive = (method == 1)
+
+    targets = CollectChildren(obj, recursive)
+    if includeParent:
+        targets.append(obj)
+
+    # Nothing to do (avoids creating an empty layer for objects without children)
+    if not targets:
+        return
+
+    layer = GetOrCreateLayer(doc, obj.GetName())
+
+    changed = False
+    for target in targets:
+        if target.GetLayerObject(doc) != layer:
+            target.SetLayerObject(layer)
+            changed = True
+
+    if changed:
+        c4d.EventAdd()
+"""
+    # -------------------------------------------------------
+    return True  # All good
+
+def main():
+    doc.StartUndo()  # Start recording undos
     selection = doc.GetActiveObjects(1)
     if len(selection) != 0:
         for s in selection:
-            CreatePythonTag(s) # Run the function
-    doc.EndUndo() # Start recording undos
-    c4d.EventAdd() # Update Cinema 4D
+            CreatePythonTag(s)  # Run the function
+    doc.EndUndo()  # Stop recording undos
+    c4d.EventAdd()  # Update Cinema 4D
 
 # Execute main()
-if __name__=='__main__':
+if __name__ == '__main__':
     main()

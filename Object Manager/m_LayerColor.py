@@ -2,7 +2,7 @@
 Author: Mateo Vallejo
 Website:
 Version: 1.0.0
-Description-US:Set same random display color to current object or tag selection.
+Description-US:Set object display color to layer's color.
 """
 
 import c4d

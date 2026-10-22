@@ -90,7 +90,8 @@ def main():
     nullObj[c4d.ID_BASELIST_ICON_COLORIZE_MODE] = 2
     nullObj[c4d.ID_BASEOBJECT_COLOR] = color
     nullObj[c4d.ID_BASELIST_ICON_COLOR] = color
-    doc.InsertObject(nullObj)
+    #doc.InsertObject(nullObj)
+    nullObj.InsertAfter(obj)
     doc.AddUndo(c4d.UNDOTYPE_NEW, nullObj)
 
     # Link the new Null to the Target tag

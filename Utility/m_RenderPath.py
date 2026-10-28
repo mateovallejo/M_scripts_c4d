@@ -37,12 +37,14 @@ def main():
         10: "../3D_Render/$prj/$prj",
         11: "../3D_Render/$take/$take",
         12: "../3D_Render/Still/$prj/$take",
-        13: "../3D_Anim/$prj",
-        14: "../3D_Anim/$take/$take",
-        15: "../../Dailies/$take_$MM$DD",
-        16: "../../Dailies/$prj_$MM$DD",
-        17: "../../Dailies/$MM$DD/$MM$DD_$prj",
-        18: "../../Rnd/$prj/$prj_$camera_",
+        13: "../3D_Render/Still/$prj/$MM$DD_$take_",
+        14: "../3D_Anim/$prj",
+        15: "../3D_Anim/$take/$take",
+        16: "../../Dailies/$take_$MM$DD",
+        17: "../../Dailies/$prj_$MM$DD",
+        18: "../../Dailies/$MM$DD/$MM$DD_$prj",
+        19: "../../Rnd/$prj/$prj_$camera_",
+        20: "tex/$prj_BG_",
     }
 
     # Define icons for the menu
@@ -56,6 +58,8 @@ def main():
         16: "&i37000&",
         17: "&i37000&",
         18: "&i37000&",
+        19: "&i37000&",
+        20: "&i37000&",
     }    
     
     # Show dropdown menu
